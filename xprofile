@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# This file runs when a DM logs you into a graphical session.
+# If you use startx/xinit like a Chad, this file will also be sourced.
+
+export TERM=alacritty
+export EDITOR=nvim
+
+setxkbmap -option grp:caps_toggle us,ru
+xset r rate 300 60
+xset -b # Remove annoying system bell sound when Ctrl+F fails
+xrandr --output eDP --set "TearFree" on
+xwallpaper --zoom ~/.bg
+
+# Autostart
+autostart="sxhkd"
+
+for program in $autostart; do
+    pidof -s "$program" || setsid -f "$program"
+done >/dev/null 2>&1
+
+# Autostart programs with arguments
+picom --no-fading-openclose --backend xrender --vsync &
+
+# Ensure that xrdb has finished running before moving on to start the WM/DE
+[ -n "$xrdbpid" ] && wait "$xrdbpid"

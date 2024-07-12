@@ -1,0 +1,276 @@
+[colors.bright]
+black = "#918175"
+blue = "#68a8e4"
+cyan = "#2be4d0"
+green = "#98bc37"
+magenta = "#ff5c8f"
+red = "#f75341"
+white = "#fce8c3"
+yellow = "#fed06e"
+
+[colors.normal]
+black = "#1c1b19"
+blue = "#2c78bf"
+cyan = "#0aaeb3"
+green = "#519f50"
+magenta = "#e02c6d"
+red = "#ef2f27"
+white = "#baa67f"
+yellow = "#fbb829"
+
+[colors.primary]
+background = "#060606"
+foreground = "#fce8c3"
+
+[font]
+size = 12.0
+
+[[keyboard.bindings]]
+action = "ScrollLineDown"
+key = "J"
+mode = "~Search"
+mods = "Alt"
+
+[[keyboard.bindings]]
+action = "ScrollLineUp"
+key = "K"
+mode = "~Search"
+mods = "Alt"
+
+[[keyboard.bindings]]
+action = "ScrollPageDown"
+key = "D"
+mode = "~Search"
+mods = "Alt"
+
+[[keyboard.bindings]]
+action = "ScrollPageUp"
+key = "U"
+mode = "~Search"
+mods = "Alt"
+
+# [schemes.Cobalt2.bright]
+# black = "#545454"
+# blue = "#5555ff"
+# cyan = "#6ae3f9"
+# green = "#3bcf1d"
+# magenta = "#ff55ff"
+# red = "#f40d17"
+# white = "#ffffff"
+# yellow = "#ecc809"
+
+# [schemes.Cobalt2.cursor]
+# cursor = "#f0cb09"
+# text = "#122637"
+
+# [schemes.Cobalt2.normal]
+# black = "#000000"
+# blue = "#1460d2"
+# cyan = "#00bbbb"
+# green = "#37dd21"
+# magenta = "#ff005d"
+# red = "#ff0000"
+# white = "#bbbbbb"
+# yellow = "#fee409"
+
+# [schemes.Cobalt2.primary]
+# background = "#282828"
+# foreground = "#ebdbb2"
+
+# [schemes.google.bright]
+# black = "#5f6368"
+# blue = "#4285f4"
+# cyan = "#24c1e0"
+# green = "#34a853"
+# magenta = "#a142f4"
+# red = "#ea4335"
+# white = "#ffffff"
+# yellow = "#fbbc05"
+
+# [schemes.google.normal]
+# black = "#202124"
+# blue = "#4285f4"
+# cyan = "#24c1e0"
+# green = "#34a853"
+# magenta = "#a142f4"
+# red = "#ea4335"
+# white = "#e8eaed"
+# yellow = "#fbbc05"
+
+# [schemes.google.primary]
+# background = "#ffffff"
+# foreground = "#000000"
+
+# [schemes.gruvbox.bright]
+# black = "#665c54"
+# blue = "#458588"
+# cyan = "#83a598"
+# green = "#689d6a"
+# magenta = "#b16286"
+# red = "#fb4934"
+# white = "#dedede"
+# yellow = "#fabd2f"
+
+# [schemes.gruvbox.normal]
+# black = "#665c54"
+# blue = "#458588"
+# cyan = "#83a598"
+# green = "#689d6a"
+# magenta = "#b16286"
+# red = "#fb4934"
+# white = "#dedede"
+# yellow = "#fabd2f"
+
+# [schemes.gruvbox.primary]
+# background = "#282828"
+# foreground = "#dedede"
+
+# [schemes.gruvbox_dark.bright]
+# black = "#928374"
+# blue = "#83a598"
+# cyan = "#8ec07c"
+# green = "#b8bb26"
+# magenta = "#d3869b"
+# red = "#fb4934"
+# white = "#ebdbb2"
+# yellow = "#fabd2f"
+
+# [schemes.gruvbox_dark.normal]
+# black = "#282828"
+# blue = "#458588"
+# cyan = "#689d6a"
+# green = "#98971a"
+# magenta = "#b16286"
+# red = "#cc241d"
+# white = "#a89984"
+# yellow = "#d79921"
+
+# [schemes.gruvbox_dark.primary]
+# background = "#282828"
+# foreground = "#ebdbb2"
+
+# [schemes.gruvbox_material.bright]
+# black = "#3c3836"
+# blue = "#7daea3"
+# cyan = "#89b482"
+# green = "#a9b665"
+# magenta = "#d3869b"
+# red = "#ea6962"
+# white = "#d4be98"
+# yellow = "#d8a657"
+
+# [schemes.gruvbox_material.normal]
+# black = "#3c3836"
+# blue = "#7daea3"
+# cyan = "#89b482"
+# green = "#a9b665"
+# magenta = "#d3869b"
+# red = "#ea6962"
+# white = "#d4be98"
+# yellow = "#d8a657"
+
+# [schemes.gruvbox_material.primary]
+# background = "#282828"
+# foreground = "#d4be98"
+
+# [schemes.hacker.bright]
+# black = "#034000"
+# blue = "#03a000"
+# cyan = "#0bff00"
+# green = "#0bff00"
+# magenta = "#0bff00"
+# red = "#ff3600"
+# white = "#0bff00"
+# yellow = "#0bff00"
+
+# [schemes.hacker.normal]
+# black = "#034000"
+# blue = "#03a000"
+# cyan = "#0bff00"
+# green = "#0bff00"
+# magenta = "#0bff00"
+# red = "#ff3600"
+# white = "#0bff00"
+# yellow = "#0bff00"
+
+# [schemes.hacker.primary]
+# background = "#000000"
+# foreground = "#0bff00"
+
+# [schemes.oceanic_next.bright]
+# black = "#405860"
+# blue = "#6699cc"
+# cyan = "#5fb3b3"
+# green = "#99c794"
+# magenta = "#c594c5"
+# red = "#ec5f67"
+# white = "#adb5c0"
+# yellow = "#fac863"
+
+# [schemes.oceanic_next.normal]
+# black = "#29414f"
+# blue = "#6699cc"
+# cyan = "#5fb3b3"
+# green = "#99c794"
+# magenta = "#c594c5"
+# red = "#ec5f67"
+# white = "#65737e"
+# yellow = "#fac863"
+
+# [schemes.oceanic_next.primary]
+# background = "#1b2b34"
+# foreground = "#d8dee9"
+
+# [schemes.srcery.bright]
+# black = "#918175"
+# blue = "#68a8e4"
+# cyan = "#2be4d0"
+# green = "#98bc37"
+# magenta = "#ff5c8f"
+# red = "#f75341"
+# white = "#fce8c3"
+# yellow = "#fed06e"
+
+# [schemes.srcery.normal]
+# black = "#1c1b19"
+# blue = "#2c78bf"
+# cyan = "#0aaeb3"
+# green = "#519f50"
+# magenta = "#e02c6d"
+# red = "#ef2f27"
+# white = "#baa67f"
+# yellow = "#fbb829"
+
+# [schemes.srcery.primary]
+# background = "#060606"
+# foreground = "#fce8c3"
+
+# [schemes.xterm.bright]
+# black = "#7f7f7f"
+# blue = "#0000ff"
+# cyan = "#00ffff"
+# green = "#00ff00"
+# magenta = "#ff00ff"
+# red = "#ff0000"
+# white = "#ffffff"
+# yellow = "#ffff00"
+
+# [schemes.xterm.normal]
+# black = "#7f7f7f"
+# blue = "#0000ff"
+# cyan = "#00ffff"
+# green = "#00ff00"
+# magenta = "#ff00ff"
+# red = "#ff0000"
+# white = "#ffffff"
+# yellow = "#ffff00"
+
+# [schemes.xterm.primary]
+# background = "#000000"
+# foreground = "#ffffff"
+
+[scrolling]
+history = 100000
+
+[window]
+opacity = 0.85
