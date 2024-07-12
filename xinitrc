@@ -34,4 +34,5 @@
 
 . "$HOME/.xprofile"
 
+# ssh-agent is needed for git ssh auth
 ssh-agent bspwm
