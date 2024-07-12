@@ -1,0 +1,3 @@
+#!/bin/bash
+# This script has a symlink in /usr/local/bin
+python ~/.dotfiles/scripts/translit.py $@ # Pass on all arguments
