@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Colors and font
 BG="#1c1b19"
 FG="#fce8c3"
 IAFG="#918175"
@@ -8,13 +7,13 @@ HL="#2c78bf"
 FONT="-misc-mononoki nerd font-medium-r-normal--24-0-0-0-m-0-ascii-0"
 
 get_datetime() {
-    # date "+%Y-%m-%d %H:%M:%S"
-    date "+%Y-%m-%d %A %H:%M:%S"
+    DATETIME=$(date "+%Y-%m-%d %A %H:%M:%S")
+    echo "DT$DATETIME"
 }
 
 get_battery() {
     BATTERY=$(cat /sys/class/power_supply/BAT0/capacity)
-    echo "$BATTERY"
+    echo "B$BATTERY"
 }
 
 get_volume() {
@@ -23,17 +22,7 @@ get_volume() {
     else
         VOLUME="muted"
     fi
-    echo "$VOLUME"
-}
-
-get_wifi() {
-    WIFI=$(nmcli device show | grep GENERAL.CONNECTION | grep -v "\--" | grep -v lo | awk '{printf $2}')
-    echo "$WIFI"
-}
-
-get_ip4() {
-    IP4=$(nmcli device show | grep IP4.ADDRESS | grep -v 127.0.0.1 | awk '{printf $2}')
-    echo "$IP4"
+    echo "V$VOLUME"
 }
 
 get_workspaces() {
@@ -55,22 +44,60 @@ get_workspaces() {
             fi
         fi
     done
-    echo -n "$output"
+    echo -n "WS$output"
+}
+
+LEMONBAR_FIFO="$HOME/.fifo/lemonbar.fifo"
+[ -e LEMONBAR_FIFO ] && rm "$LEMONBAR_FIFO"
+mkfifo "$LEMONBAR_FIFO"
+
+run_datetime() {
+    while true; do
+        get_datetime > "$LEMONBAR_FIFO"
+        sleep 1
+    done
+}
+
+run_battery() {
+    while true; do
+        get_battery > "$LEMONBAR_FIFO"
+        sleep 3
+    done
+}
+
+run_volume() {
+    while true; do
+        get_volume > "$LEMONBAR_FIFO"
+        sleep 0.5 # TODO find a better way, maybe react on sxhkd
+    done
+}
+
+run_workspaces() {
+    bspc subscribe report | while read -r line; do
+        get_workspaces > "$LEMONBAR_FIFO"
+    done
 }
 
 update_lemonbar() {
-    DATETIME=$(get_datetime)
-    BATTERY=$(get_battery)
-    VOLUME=$(get_volume)
-    WIFI=$(get_wifi)
-    WS=$(get_workspaces)
+    read -r line < "$LEMONBAR_FIFO"
 
-    # Create the status line
+    case $line in
+        DT*) DATETIME="${line#??}";;
+        B*) BATTERY="${line#?}";;
+        V*) VOLUME="${line#?}";;
+        WS*) WS="${line#??}";;
+    esac
+
     echo -e "%{l}$WS %{c}$DATETIME %{r}Volume $VOLUME | Battery $BATTERY "
 }
 
-# Infinite loop to update bar
+run_datetime &
+run_battery &
+run_volume &
+run_workspaces &
+
 while true; do
     update_lemonbar
-    sleep 1
 done | lemonbar -g x32 -B "$BG" -F "$FG" -f "$FONT" -p
+
+trap "rm -f $LEMONBAR_FIFO" EXIT
