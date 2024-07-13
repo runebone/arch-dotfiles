@@ -78,6 +78,19 @@ run_workspaces() {
     done
 }
 
+run_layout() {
+    while true; do
+        current_variant=$(setxkbmap -query | grep variant | awk '{print $2}')
+
+        if [ "$current_variant" = "dvorak," ]; then
+            echo "LDvorak" > "$LEMONBAR_FIFO"
+        else
+            echo "LQwerty" > "$LEMONBAR_FIFO"
+        fi
+        sleep 0.5 # TODO same
+    done
+}
+
 update_lemonbar() {
     read -r line < "$LEMONBAR_FIFO"
 
@@ -86,15 +99,17 @@ update_lemonbar() {
         B*) BATTERY="${line#?}";;
         V*) VOLUME="${line#?}";;
         WS*) WS="${line#??}";;
+        L*) LAYOUT="${line#?}";;
     esac
 
-    echo -e "%{l}$WS %{c}$DATETIME %{r}Volume $VOLUME | Battery $BATTERY "
+    echo -e "%{l}$WS %{c}$DATETIME %{r}Volume $VOLUME | Battery $BATTERY | $LAYOUT "
 }
 
 run_datetime &
 run_battery &
 run_volume &
 run_workspaces &
+run_layout &
 
 while true; do
     update_lemonbar
