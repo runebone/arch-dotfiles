@@ -14,7 +14,7 @@ else
 
     if [ $? == 0 ]; then
         # Update done
-        echo $prev_pkgs > $HOME/.dotfiles/pkglist.txt
+        echo "$prev_pkgs" > $HOME/.dotfiles/pkglist.txt
 
         # TODO Check it out. Does it work as expected?
         cd $HOME/.dotfiles && git diff pkglist.txt | grep -q "."
