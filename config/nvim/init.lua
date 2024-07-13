@@ -20,4 +20,14 @@ vim.cmd [[
     set splitbelow splitright
 
     colorscheme retrobox
+
+    inoremap {<CR> {<CR>}<C-o>O
+    inoremap [<CR> [<CR>]<C-o>O
+    inoremap (<CR> (<CR>)<C-o>O
+
+    inoremap <C-c> <Esc>
+
+    " TODO
+    nnoremap j gj
+    nnoremap k gk
 ]]
