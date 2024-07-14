@@ -31,7 +31,9 @@ pipewire 1:1.2.1-1
 pipewire-alsa 1:1.2.1-1
 pipewire-pulse 1:1.2.1-1
 ripgrep 14.1.0-1
+rlwrap 0.46.1-1
 rofi 1.7.5-3
+sbcl 2.4.6-1
 sudo 1.9.15.p5-1
 sxhkd 0.6.2-3
 sxiv 26-2
