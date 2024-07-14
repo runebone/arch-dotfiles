@@ -9,6 +9,8 @@ alias sdn='shutdown now'
 alias sz='source ~/.zshrc'
 alias up='sh ~/.dotfiles/scripts/update_packages.sh'
 alias sbg='xwallpaper --zoom'
+alias sbcl='rlwrap sbcl' # Add history and arrows navigation
+alias ssh='TERM=xterm-256color ssh'
 
 alias D='cd ~/Downloads && l'
 alias d='cd ~/Documents && l'
