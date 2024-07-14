@@ -13,7 +13,15 @@ get_datetime() {
 
 get_battery() {
     BATTERY=$(cat /sys/class/power_supply/BAT0/capacity)
-    echo "B$BATTERY"
+    STATUS=$(cat /sys/class/power_supply/BAT0/status | sed 's/.*/\L&/')
+
+    if [ $STATUS = "charging" ]; then
+        STATUS="($STATUS) "
+    else
+        STATUS=""
+    fi
+
+    echo "B$STATUS$BATTERY"
 }
 
 get_volume() {
