@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Check for updates
-pacman -Qu | grep -q "." > /dev/null
+sudo pacman -Sy && pacman -Qu | grep -q "." > /dev/null
 
 if [ $? != 0 ]; then
     echo "There is no updates."
