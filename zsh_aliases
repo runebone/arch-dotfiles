@@ -11,10 +11,14 @@ alias up='sh ~/.dotfiles/scripts/update_packages.sh'
 alias sbg='xwallpaper --zoom'
 alias sbcl='rlwrap sbcl' # Add history and arrows navigation
 alias ssh='TERM=xterm-256color ssh'
+alias p='sudo pacman --color=auto'
+alias pacman='pacman --color=auto'
+alias sbgb='xwallpaper --zoom ~/.bg'
+alias cbg='xwallpaper --clear'
 
 alias D='cd ~/Downloads && l'
 alias d='cd ~/Documents && l'
-alias p='cd ~/Pictures && l'
+alias pp='cd ~/Pictures && l'
 alias sc='cd ~/Pictures/Screenshots && l'
 alias wp='cd ~/Pictures/Wallpapers && l'
 
