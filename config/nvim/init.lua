@@ -1,33 +1,30 @@
-vim.cmd [[
-    set encoding=utf-8
-    set nohlsearch
-    set clipboard+=unnamedplus
+--[[
+-- Setup initial configuration,
+-- 
+-- Primarily just download and execute lazy.nvim
+--]]
+vim.g.mapleader = " "
 
-    set tabstop=4
-    set shiftwidth=4
-    set expandtab
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.uv.fs_stat(lazypath) then
+    vim.fn.system {
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable",
+        lazypath,
+    }
+end
 
-    set t_Co=256
-    set bg=dark
+-- Add lazy to the `runtimepath`, this allows us to `require` it.
+---@diagnostic disable-next-line: undefined-field
+vim.opt.rtp:prepend(lazypath)
 
-    set guifont=Mononoki:h12
+-- Set up lazy, and load my `lua/custom/plugins/` folder
+require("lazy").setup({
+    import = "custom/plugins",
+    change_detection = { notify = false },
+})
 
-    set number relativenumber
-    set cul
-    set cuc
-    set colorcolumn=80
-
-    set splitbelow splitright
-
-    colorscheme retrobox
-
-    inoremap {<CR> {<CR>}<C-o>O
-    inoremap [<CR> [<CR>]<C-o>O
-    inoremap (<CR> (<CR>)<C-o>O
-
-    inoremap <C-c> <Esc>
-
-    " TODO
-    nnoremap j gj
-    nnoremap k gk
-]]
+SetGruvbox()
