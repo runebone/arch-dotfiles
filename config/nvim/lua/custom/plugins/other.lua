@@ -5,6 +5,8 @@ return {
     { "Yggdroot/indentLine" },
     { "vim-airline/vim-airline" },
     { "vim-airline/vim-airline-themes" },
-    { "ap/vim-css-color" },
     { "fatih/vim-go" },
+    { "norcalli/nvim-colorizer.lua", config = function()
+        require("colorizer").setup({ "*" }, { names = false })
+    end },
 }
