@@ -3,7 +3,10 @@
 BG="#1c1b19"
 FG="#fce8c3"
 IAFG="#918175"
-HL="#2c78bf"
+# HL="#2c78bf" # Blue
+# HL="#e02c6d" # Magenta
+# HL="#fbb829" # Yellow
+HL=$FG
 FONT="-misc-mononoki nerd font-medium-r-normal--24-0-0-0-m-0-ascii-0"
 
 get_datetime() {
@@ -15,7 +18,7 @@ get_battery() {
     BATTERY=$(cat /sys/class/power_supply/BAT0/capacity)
     STATUS=$(cat /sys/class/power_supply/BAT0/status | sed 's/.*/\L&/')
 
-    if [ $STATUS = "charging" ]; then
+    if [ "$STATUS" = "charging" ]; then
         STATUS="($STATUS) "
     else
         STATUS=""
@@ -43,6 +46,8 @@ get_workspaces() {
         x=" $ws "
         if [ "$ws" == "$current" ]; then
             output="${output}%{B$HL}%{F$BG}$x%{B$BG}%{F$FG}"
+            # output="${output}%{A:bspc desktop -f $ws:}%{B$HL}%{F$BG}$x%{B$BG}%{F$FG}%{A}"
+            # output="${output}%{A:reboot:}%{B$HL}%{F$BG}$x%{B$BG}%{F$FG}%{A}"
         else
             cmd=$(echo "$active" | grep "$ws")
             if [[ $? != 0 ]]; then
