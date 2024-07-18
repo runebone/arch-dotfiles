@@ -2,12 +2,12 @@ super + Return
 	$TERM
 super + m
 	pactl set-source-mute @DEFAULT_SOURCE@ toggle
-super + r
+super + shift + r
     $TERM -e htop
 super + shift + m
     pamixer -t # Toggle mute audio
-super + shift + r
-    $TERM -e lf # TODO lf -> yazi
+super + r
+    $TERM -e yazi
 super + shift + w
     $TERM -e nmtui
 super + shift + {1-9}
@@ -44,3 +44,5 @@ super + bracketright
     bspc node -z left 120 0 || bspc node -z right 120 0
 super + i
     sh $HOME/.dotfiles/scripts/switch_layout.sh
+super + x
+    nmcli device connect wlp3s0
