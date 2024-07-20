@@ -17,6 +17,8 @@ alias sbgb='xwallpaper --zoom ~/.bg'
 alias cbg='xwallpaper --clear'
 alias translit='python ~/.dotfiles/scripts/translit.py'
 alias discord='devour discord'
+alias pavu='devour pavucontrol'
+alias gimp='devour gimp'
 
 alias D='cd ~/Downloads && l'
 alias d='cd ~/Documents && l'
