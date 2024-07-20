@@ -3,6 +3,7 @@ alsa-firmware 1.2.4-4
 alsa-utils 1.2.12-1
 base 3-2
 base-devel 1-1
+bash-language-server 5.4.0-1
 brightnessctl 0.5.1-3
 bspwm 0.9.10-3
 cgdb 0.8.0-2
@@ -27,7 +28,7 @@ htop 3.3.0-3
 imagemagick 7.1.1.35-1
 less 1:661-1
 lf 32-1
-linux 6.9.9.arch1-1
+linux 6.9.10.arch1-1
 linux-firmware 20240703.e94a2a3b-1
 maim 5.8.0-2
 man-pages 6.9.1-1
