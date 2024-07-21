@@ -46,3 +46,4 @@ function ToggleWrap()
 end
 
 vim.keymap.set("n", "<leader>wl", "<cmd>lua ToggleWrap()<CR>") -- Because I have "wr" and "wa" bindings
+vim.keymap.set("n", "<leader>h", "<cmd>nohlsearch<CR>")
