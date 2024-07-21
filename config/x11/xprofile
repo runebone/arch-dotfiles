@@ -10,7 +10,8 @@ setxkbmap -option grp:caps_toggle us,ru
 xset r rate 300 60
 xset -b # Remove annoying system bell sound when Ctrl+F fails
 xrandr --output eDP --set "TearFree" on
-xwallpaper --zoom ~/.bg
+# xwallpaper --zoom ~/.bg
+xwallpaper --maximize ~/.bg
 
 # Autostart
 autostart="sxhkd"

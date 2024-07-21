@@ -9,7 +9,9 @@ export ZSH="$HOME/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="robbyrussell"
-ZSH_THEME="half-life"
+
+# NOTE There is a symlink to /home/rukost/.dotfiles/config/zsh/themes/my-half-life.zsh-theme in ~/.oh-my-zsh/themes
+ZSH_THEME="my-half-life"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -111,3 +113,6 @@ source "$HOME/.zsh_aliases"
 
 eval "$(zoxide init zsh)"
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+export PATH="/home/rukost/.local/bin:$PATH"
+export PATH="/home/rukost/.dotfiles/scripts/bin:$PATH"
