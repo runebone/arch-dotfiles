@@ -29,4 +29,20 @@ require("lazy").setup({
     change_detection = { notify = false },
 })
 
+-- Other configuration
+
 SetGruvbox()
+
+vim.cmd [[ au TextYankPost * silent! lua vim.highlight.on_yank { timeout=100 } ]]
+
+vim.keymap.set("n", "<leader>x", "<cmd>.lua<CR>", { desc = "Execute the current line" })
+
+function ToggleWrap()
+    if vim.o.wrap then
+        vim.opt.wrap = false
+    else
+        vim.opt.wrap = true
+    end
+end
+
+vim.keymap.set("n", "<leader>wl", "<cmd>lua ToggleWrap()<CR>") -- Because I have "wr" and "wa" bindings

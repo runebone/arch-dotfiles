@@ -19,7 +19,7 @@ opt.tabstop = 4
 opt.signcolumn = "yes"
 
 -- Don't have `o` add a comment
-opt.formatoptions:remove("o")
+-- opt.formatoptions:remove("o")
 
 opt.wrap = true
 opt.linebreak = true
