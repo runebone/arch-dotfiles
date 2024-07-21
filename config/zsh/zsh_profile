@@ -1,0 +1,8 @@
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.dotfiles/scripts/bin:$PATH"
+
+# t y o p ] \ a s f k z n - available letters to bind Ctrl+
+
+bindkey -s "^t" "tmux-sessionizer\n"
+bindkey -s "^f" 'cd "$(dirname "$(fzf)")"\n'
+bindkey -s "^y" "yazi\n"

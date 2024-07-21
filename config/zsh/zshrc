@@ -108,11 +108,9 @@ source $ZSH/oh-my-zsh.sh
 
 # The following lines were added by compinstall
 
-source "$HOME/.zshrc.pre-oh-my-zsh"
-source "$HOME/.zsh_aliases"
+source $HOME/.zshrc.pre-oh-my-zsh
+source $HOME/.zsh_aliases
+source $HOME/.zsh_profile
 
 eval "$(zoxide init zsh)"
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-export PATH="/home/rukost/.local/bin:$PATH"
-export PATH="/home/rukost/.dotfiles/scripts/bin:$PATH"
