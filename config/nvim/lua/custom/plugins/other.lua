@@ -7,6 +7,13 @@ return {
     end },
     -- { "vim-airline/vim-airline" },
     -- { "vim-airline/vim-airline-themes" },
+    {
+        "nvim-lualine/lualine.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        config = function()
+            require("lualine").setup()
+        end
+    },
     { "fatih/vim-go" },
     { "norcalli/nvim-colorizer.lua", config = function()
         require("colorizer").setup({ "*" }, { names = false })
