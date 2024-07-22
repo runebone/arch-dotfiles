@@ -70,7 +70,16 @@ sudo 1.9.15.p5-2
 sxhkd 0.6.2-3
 sxiv 26-2
 telegram-desktop 5.2.3-1
+texlive-bibtexextra 2024.2-2
+texlive-binextra 2024.2-2
+texlive-fontsextra 2024.2-2
+texlive-langcjk 2024.2-2
+texlive-langcyrillic 2024.2-2
+texlive-langenglish 2024.2-2
+texlive-langgreek 2024.2-2
 texlive-latexextra 2024.2-2
+texlive-mathscience 2024.2-2
+texlive-plaingeneric 2024.2-2
 tldr 3.3.0-1
 tmux 3.4-9
 translate-shell 0.9.7.1-2
