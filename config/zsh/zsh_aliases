@@ -24,6 +24,7 @@ alias gimp='devour gimp'
 alias cs='cht.sh --shell'
 alias t='tmux'
 alias ta='tmux attach'
+alias obs='devour obs'
 
 alias D='cd ~/Downloads && l'
 alias d='cd ~/Documents && l'
