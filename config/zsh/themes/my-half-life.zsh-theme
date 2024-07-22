@@ -14,7 +14,7 @@
 #   purple="%{${(%):-"%F{135}"}%}"
 #   hotpink="%{${(%):-"%F{161}"}%}"
 #   limegreen="%{${(%):-"%F{118}"}%}"
-# XXX Modified by me
+# XXX: Modified by me
 # else
   myblue="%{${(%):-"%F{blue}"}%}"
   turquoise="%{${(%):-"%F{cyan}"}%}"

@@ -5,4 +5,5 @@ export PATH="$HOME/.dotfiles/scripts/bin:$PATH"
 
 bindkey -s "^t" "tmux-sessionizer\n"
 bindkey -s "^f" 'cd "$(dirname "$(fzf)")"\n'
+bindkey -s "^o" 'fzf_file=$(fzf) && [ $fzf_file ] && vim $fzf_file\n'
 bindkey -s "^y" "yazi\n"
