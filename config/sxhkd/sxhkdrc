@@ -1,7 +1,5 @@
 super + Return
 	$TERM
-super + t
-	$TERM -e tmux
 super + m
 	pactl set-source-mute @DEFAULT_SOURCE@ toggle
 super + shift + r
