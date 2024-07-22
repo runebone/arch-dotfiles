@@ -16,7 +16,7 @@ else
         # Update done
         echo "$prev_pkgs" > $HOME/.dotfiles/pkglist.txt
 
-        # TODO Check it out. Does it work as expected?
+        # TODO: Check it out. Does it work as expected?
         cd $HOME/.dotfiles && git diff pkglist.txt | grep -q "."
 
         if [ $? == 0 ]; then

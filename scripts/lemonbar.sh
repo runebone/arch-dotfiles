@@ -83,7 +83,7 @@ run_battery() {
 run_volume() {
     while true; do
         get_volume > "$LEMONBAR_FIFO"
-        sleep 0.5 # TODO find a better way, maybe react on sxhkd
+        sleep 0.5 # TODO: find a better way, maybe react on sxhkd
     done
 }
 
@@ -102,7 +102,7 @@ run_layout() {
         else
             echo "LQwerty" > "$LEMONBAR_FIFO"
         fi
-        sleep 0.5 # TODO same
+        sleep 0.5 # TODO: same
     done
 }
 
