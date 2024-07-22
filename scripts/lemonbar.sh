@@ -61,8 +61,10 @@ get_workspaces() {
 }
 
 LEMONBAR_FIFO="$HOME/.fifo/lemonbar.fifo"
+# LEMONBAR_FIFO="$(mktemp -u)$(tty | tr "/" "-")-lemonbar.fifo"
 [ -e LEMONBAR_FIFO ] && rm "$LEMONBAR_FIFO"
 mkfifo "$LEMONBAR_FIFO"
+trap "rm -f $LEMONBAR_FIFO" EXIT
 
 run_datetime() {
     while true; do
@@ -127,5 +129,3 @@ run_layout &
 while true; do
     update_lemonbar
 done | lemonbar -g x32 -B "$BG" -F "$FG" -f "$FONT" -p
-
-trap "rm -f $LEMONBAR_FIFO" EXIT
