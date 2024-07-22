@@ -60,8 +60,8 @@ get_workspaces() {
     echo -n "WS$output"
 }
 
-LEMONBAR_FIFO="$HOME/.fifo/lemonbar.fifo"
-# LEMONBAR_FIFO="$(mktemp -u)$(tty | tr "/" "-")-lemonbar.fifo"
+# LEMONBAR_FIFO="$HOME/.fifo/lemonbar.fifo"
+LEMONBAR_FIFO="$(mktemp -u)$(tty | tr "/" "-")-lemonbar.fifo"
 [ -e LEMONBAR_FIFO ] && rm "$LEMONBAR_FIFO"
 mkfifo "$LEMONBAR_FIFO"
 trap "rm -f $LEMONBAR_FIFO" EXIT
