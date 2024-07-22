@@ -85,7 +85,36 @@ local setup = function()
 
     lspconfig.clangd.setup(config)
     lspconfig.gopls.setup(config)
-    lspconfig.pyright.setup(config)
+
+    -- Python: use Pyright to go to definitions and Ruff for everything else
+    lspconfig.ruff.setup(config)
+    lspconfig.ruff_lsp.setup({
+        on_attach = function(client, bufnr)
+            config.on_attach(client, bufnr)
+            if client.name == 'ruff_lsp' then
+                -- Disable hover in favor of Pyright
+                client.server_capabilities.hoverProvider = false
+            end
+        end,
+        capabilities = config.capabilities
+    })
+    lspconfig.pyright.setup({
+        on_attach = config.on_attach,
+        capabilities = config.capabilities,
+        settings = {
+            pyright = {
+                -- Using Ruff's import organizer
+                disableOrganizeImports = true,
+            },
+            python = {
+                analysis = {
+                    -- Ignore all files for analysis to exclusively use Ruff for linting
+                    ignore = { '*' },
+                },
+            },
+        }
+    })
+
     lspconfig.lua_ls.setup({
         on_attach = config.on_attach,
         capabilities = config.capabilities,
