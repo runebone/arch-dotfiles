@@ -26,32 +26,41 @@ alias t='tmux'
 alias ta='tmux attach'
 alias obs='devour obs'
 
-alias D='cd ~/Downloads && l'
-alias d='cd ~/Documents && l'
-alias p='cd ~/Pictures && ls'
+alias  u='cd ~/University && l'
+alias  D='cd ~/Downloads && l'
+alias  d='cd ~/Documents && l'
+alias  p='cd ~/Pictures && ls'
 alias pp='cd ~/Personal && l'
-alias u='cd ~/University && l'
 alias sc='cd ~/Pictures/Screenshots && l'
 alias wp='cd ~/Pictures/Wallpapers && ls'
 alias tt='cd ~/Downloads/Torrents && l'
 alias lb='cd ~/.local/bin && l'
 
-alias cfa='vim ~/.zsh_aliases'
-alias cf='cd ~/.config && l'
+alias  cf='cd ~/.config && l'
 alias cdc='cd ~/.dotfiles/config && l'
 alias cdl='cd ~/.local && l'
 alias cdn='cd ~/.dotfiles/config/nvim && l'
-alias cfn='vim ~/.config/nvim/init.lua'
-alias cfs='vim ~/.config/sxhkd/sxhkdrc'
 alias cdp='cd ~/.local/my-packages && l'
 alias cds='cd ~/.dotfiles/scripts && l'
-alias cff='vim ~/.config/fontconfig/fonts.conf'
-alias cfx='vim ~/.xprofile'
-alias cfb='vim ~/.config/bspwm/bspwmrc'
 alias cdd='cd ~/.dotfiles && l'
-alias cfl='vim ~/.dotfiles/scripts/lemonbar.sh'
-alias cfz='vim ~/.zsh_profile'
-alias cft='vim ~/.config/tmux/tmux.conf'
-alias cfA='vim ~/.config/alacritty/alacritty.toml'
 alias cdz='cd ~/.dotfiles/config/zsh && l'
 alias cdx='cd ~/.dotfiles/config/x11 && l'
+
+# All editing shortcuts are for dotfiles, so run Telescope from there
+function zsh_vim_edit_dotfiles {
+    file=$1
+    back=$(pwd)
+    cd $HOME/.dotfiles && vim $file && cd $back
+}
+e=zsh_vim_edit_dotfiles
+
+alias cfa='$e ~/.zsh_aliases'
+alias cfn='$e ~/.config/nvim/init.lua'
+alias cfs='$e ~/.config/sxhkd/sxhkdrc'
+alias cff='$e ~/.config/fontconfig/fonts.conf'
+alias cfx='$e ~/.xprofile'
+alias cfb='$e ~/.config/bspwm/bspwmrc'
+alias cfl='$e ~/.dotfiles/scripts/lemonbar.sh'
+alias cfz='$e ~/.zsh_profile'
+alias cft='$e ~/.config/tmux/tmux.conf'
+alias cfA='$e ~/.config/alacritty/alacritty.toml'
