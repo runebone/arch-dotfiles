@@ -30,14 +30,13 @@ require("lazy").setup({
 })
 
 -- Other configuration
-
 SetGruvbox()
 
 vim.cmd [[ au TextYankPost * silent! lua vim.highlight.on_yank { timeout=100 } ]]
 
-vim.keymap.set("n", "<leader>x", "<cmd>.lua<CR>", { desc = "Execute the current line" })
+vim.keymap.set("n", "<leader>x", ":.lua<CR>", { desc = "Execute the current line" })
 
-function ToggleWrap()
+function ToggleWrapLines()
     if vim.o.wrap then
         vim.opt.wrap = false
     else
@@ -45,5 +44,16 @@ function ToggleWrap()
     end
 end
 
-vim.keymap.set("n", "<leader>wl", "<cmd>lua ToggleWrap()<CR>") -- Because I have "wr" and "wa" bindings
-vim.keymap.set("n", "<leader>h", "<cmd>nohlsearch<CR>")
+vim.keymap.set("n", "<leader>wl", ":lua ToggleWrapLines()<CR>")
+vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>")
+
+-- Not great but usable
+vim.keymap.set("n", "<C-h>", "<C-w>5<")
+vim.keymap.set("n", "<C-j>", "<C-w>-")
+vim.keymap.set("n", "<C-k>", "<C-w>+")
+vim.keymap.set("n", "<C-l>", "<C-w>5>")
+
+-- Got used to it already
+vim.keymap.set("i", "{<CR>", "{<CR>}<C-o>O")
+vim.keymap.set("i", "(<CR>", "(<CR>)<C-o>O")
+vim.keymap.set("i", "[<CR>", "[<CR>]<C-o>O")
