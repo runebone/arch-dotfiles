@@ -12,6 +12,7 @@ xset -b # Remove annoying system bell sound when Ctrl+F fails
 xrandr --output eDP --set "TearFree" on
 # xwallpaper --zoom ~/.bg
 xwallpaper --maximize ~/.bg
+xmodmap $HOME/.dotfiles/config/x11/xmodmaps/alt.xmodmap
 
 # Autostart
 autostart="sxhkd"

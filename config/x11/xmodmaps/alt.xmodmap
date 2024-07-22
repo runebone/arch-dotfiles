@@ -1,0 +1,2 @@
+! Bind Alt_L to KP_4 (KP_End) because my Alts are not working
+keycode 83 = Alt_L Alt_L Alt_L Alt_L
