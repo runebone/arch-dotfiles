@@ -16,7 +16,7 @@ discord 0.0.60-1
 docker 1:27.0.3-1
 docker-compose 2.29.0-1
 efibootmgr 18-3
-fastfetch 2.18.1-1
+fastfetch 2.19.0-1
 fd 10.1.0-1
 firefox 128.0-2
 fzf 0.54.0-1
@@ -60,10 +60,12 @@ pipewire 1:1.2.1-1
 pipewire-alsa 1:1.2.1-1
 pipewire-pulse 1:1.2.1-1
 pyright 1.1.372-1
+python-poetry 1.8.3-1
 qemu-desktop 9.0.2-1
 ripgrep 14.1.0-1
 rlwrap 0.46.1-2
 rofi 1.7.5-3
+ruff 0.5.4-1
 rustup 1.27.1-1
 sbcl 2.4.6-1
 sudo 1.9.15.p5-2
@@ -196,7 +198,7 @@ xwallpaper 0.7.4-2
 yazi 0.2.5-2
 zathura 0.5.6-2
 zathura-djvu 0.2.9-7
-zathura-pdf-mupdf 0.4.3-5
+zathura-pdf-mupdf 0.4.3-6
 zoxide 0.9.4-2
 zsh 5.9-5
 zsh-syntax-highlighting 0.8.0-1
