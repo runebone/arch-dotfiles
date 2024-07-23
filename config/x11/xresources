@@ -1,0 +1,21 @@
+xterm*faceName: Monospace
+xterm*faceSize: 17
+
+xterm*foreground:  #fce8c3 
+xterm*background:  #060606 
+xterm*color0:      #1c1b19 
+xterm*color8:      #918175 
+xterm*color1:      #ef2f27 
+xterm*color9:      #f75341 
+xterm*color2:      #519f50 
+xterm*color10:     #98bc37 
+xterm*color3:      #fbb829 
+xterm*color11:     #fed06e 
+xterm*color4:      #2c78bf 
+xterm*color12:     #68a8e4 
+xterm*color5:      #e02c6d 
+xterm*color13:     #ff5c8f 
+xterm*color6:      #0aaeb3 
+xterm*color14:     #2be4d0 
+xterm*color7:      #baa67f 
+xterm*color15:     #fce8c3 
