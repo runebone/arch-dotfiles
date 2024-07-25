@@ -13,7 +13,7 @@ delve 1.23.0-1
 devour 12-2
 devour-debug 12-2
 discord 0.0.61-1
-docker 1:27.0.3-1
+docker 1:27.1.1-1
 docker-compose 2.29.1-1
 efibootmgr 18-3
 fastfetch 2.19.1-1
@@ -55,6 +55,7 @@ otf-opendyslexic-nerd 3.2.1-2
 otf-overpass-nerd 3.2.1-2
 pamixer 1.6-3
 pavucontrol 1:6.0-1
+perf 6.10-1
 picom 11.2-1
 pipewire 1:1.2.1-1
 pipewire-alsa 1:1.2.1-1
@@ -65,7 +66,7 @@ qemu-desktop 9.0.2-1
 ripgrep 14.1.0-1
 rlwrap 0.46.1-2
 rofi 1.7.5-3
-ruff 0.5.4-1
+ruff 0.5.5-1
 rustup 1.27.1-1
 sbcl 2.4.6-1
 sudo 1.9.15.p5-2
