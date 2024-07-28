@@ -32,6 +32,8 @@ super + {q,+ shift + q}
     bspc node -{c,k}
 super + d
     rofi -show drun
+super + shift + e
+    rofi -modi emoji -show emoji
 super + p
     _PATH_=$HOME/Pictures/Screenshots/pic-full-$(date '+%y%m%d-%H%M-%S').png && maim $_PATH_ && xclip -selection clipboard -t image/png $_PATH_
 super + shift + p
