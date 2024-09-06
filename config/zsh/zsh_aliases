@@ -31,6 +31,7 @@ alias  u='cd ~/University && l'
 alias  D='cd ~/Downloads && l'
 alias  d='cd ~/Documents && l'
 alias  p='cd ~/Pictures && ls'
+alias  v='cd ~/Videos && ls'
 alias pp='cd ~/Personal && l'
 alias sc='cd ~/Pictures/Screenshots && l'
 alias wp='cd ~/Pictures/Wallpapers && ls'
@@ -46,6 +47,8 @@ alias cds='cd ~/.dotfiles/scripts && l'
 alias cdd='cd ~/.dotfiles && l'
 alias cdz='cd ~/.dotfiles/config/zsh && l'
 alias cdx='cd ~/.dotfiles/config/x11 && l'
+alias  cb='cd ~/Code/bmstu && l'
+alias   c='cd ~/Code && l'
 
 # All editing shortcuts are for dotfiles, so run Telescope from there
 function zsh_vim_edit_dotfiles {
