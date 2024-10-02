@@ -7,3 +7,5 @@ bindkey -s "^t" "tmux-sessionizer\n"
 bindkey -s "^f" 'cd "$(dirname "$(fzf)")"\n'
 bindkey -s "^o" 'fzf_file=$(fzf) && [ $fzf_file ] && vim $fzf_file\n'
 bindkey -s "^y" "yazi\n"
+bindkey -s "^p" 'fzf_file=$(fzf) && [ $fzf_file ] && python $fzf_file\n'
+bindkey -s "^s" 'fzf_file=$(fzf) && [ $fzf_file ] && sxiv $fzf_file\n'

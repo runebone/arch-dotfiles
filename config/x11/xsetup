@@ -3,6 +3,6 @@
 setxkbmap -option grp:caps_toggle us,ru
 xset r rate 300 60
 xset -b # Remove annoying system bell sound when Ctrl+F fails
-xwallpaper --maximize ~/.bg
+xwallpaper --zoom ~/.bg
 xmodmap $HOME/.dotfiles/config/x11/xmodmaps/alt.xmodmap
 xrdb -merge $HOME/.dotfiles/config/x11/xresources
