@@ -29,6 +29,8 @@ alias obs='devour obs'
 alias lo='devour libreoffice'
 alias drawio='devour drawio'
 alias zoom='devour zoom'
+alias vb='devour virtualbox'
+alias pl='nordvpn c Poland'
 
 alias  u='cd ~/University && l'
 alias  D='cd ~/Downloads && l'
@@ -52,6 +54,7 @@ alias cdz='cd ~/.dotfiles/config/zsh && l'
 alias cdx='cd ~/.dotfiles/config/x11 && l'
 alias  cb='cd ~/Code/bmstu && l'
 alias   c='cd ~/Code && l'
+alias cdw='cd ~/Work && l'
 
 # All editing shortcuts are for dotfiles, so run Telescope from there
 function zsh_vim_edit_dotfiles {
@@ -70,7 +73,9 @@ alias cfb='$e ~/.config/bspwm/bspwmrc'
 alias cfl='$e ~/.dotfiles/scripts/lemonbar.sh'
 alias cfz='$e ~/.zsh_profile'
 alias cft='$e ~/.config/tmux/tmux.conf'
+alias cft='$e ~/.config/tmux/tmux.conf'
 alias cfA='$e ~/.config/alacritty/alacritty.toml'
+alias cfts='$e ~/.dotfiles/scripts/bin/tmux-sessionizer'
 
 alias ca='conda activate'
 alias py='conda activate py'
