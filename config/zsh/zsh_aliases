@@ -77,5 +77,4 @@ alias cft='$e ~/.config/tmux/tmux.conf'
 alias cfA='$e ~/.config/alacritty/alacritty.toml'
 alias cfts='$e ~/.dotfiles/scripts/bin/tmux-sessionizer'
 
-alias ca='conda activate'
-alias py='conda activate py'
+alias va='source .venv/bin/activate'

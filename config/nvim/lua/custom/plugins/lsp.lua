@@ -84,7 +84,25 @@ local setup = function()
     local lspconfig = require('lspconfig')
 
     lspconfig.clangd.setup(config)
-    lspconfig.gopls.setup(config)
+    -- lspconfig.gopls.setup(config)
+    lspconfig.gopls.setup({
+        on_attach = lsp_attach,
+        capabilities = lsp_capabilities,
+        settings = {
+            gopls = {
+                buildFlags = {"-tags=unit,integration,e2e"},
+                analyses = {
+                    unusedparams = true,
+                },
+                staticcheck = true,
+                codelenses = {
+                    generate = true,
+                    gc_details = true,
+                },
+                gofumpt = true,
+            }
+        }
+    })
     lspconfig.ruff.setup(config)
     lspconfig.pyright.setup(config)
     lspconfig.lua_ls.setup({

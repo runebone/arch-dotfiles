@@ -15,6 +15,7 @@ x-scheme-handler/http=firefox.desktop;
 x-scheme-handler/https=firefox.desktop;
 
 [Default Applications]
+application/fb2=org.pwmt.zathura.desktop;
 application/pdf=org.pwmt.zathura.desktop;
 application/postscript=org.pwmt.zathura.desktop;
 application/x-extension-htm=firefox.desktop
@@ -27,6 +28,7 @@ image/gif=sxiv.desktop;
 image/jpeg=sxiv.desktop;
 image/png=sxiv.desktop;
 inode/directory=yazi.desktop
+text/fb2+xml=org.pwmt.zathura.desktop;
 text/html=firefox.desktop
 text/plain=nvim.desktop;
 text/x-shellscript=nvim.desktop;

@@ -38,6 +38,8 @@ super + p
     _PATH_=$HOME/Pictures/Screenshots/pic-full-$(date '+%y%m%d-%H%M-%S').png && maim $_PATH_ && xclip -selection clipboard -t image/png $_PATH_
 super + shift + p
     _PATH_=$HOME/Pictures/Screenshots/pic-sel-$(date '+%y%m%d-%H%M-%S').png && maim -s --noopengl $_PATH_ && xclip -selection clipboard -t image/png $_PATH_
+super + s
+    pavucontrol
 super + shift + s
     systemctl suspend
 super + bracketleft
