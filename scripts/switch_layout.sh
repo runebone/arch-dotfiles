@@ -6,5 +6,5 @@ if [ "$current_variant" = "dvorak," ]; then
     setxkbmap -layout us,ru
 else
     setxkbmap -layout us,ru -variant dvorak,
-    xmodmap $HOME/.dotfiles/xmodmaps/rpd.xmodmap
+    xmodmap $HOME/.dotfiles/config/x11/xmodmaps/rpd.xmodmap
 fi
