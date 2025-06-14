@@ -14,7 +14,7 @@ return {
             require("lualine").setup()
         end
     },
-    { "fatih/vim-go" },
+    -- { "fatih/vim-go" },
     { "norcalli/nvim-colorizer.lua", config = function()
         require("colorizer").setup({ "*" }, { names = false })
     end },
@@ -27,4 +27,5 @@ return {
         end)
       end
     },
+    { "Vimjas/vim-python-pep8-indent" },
 }
