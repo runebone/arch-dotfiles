@@ -13,7 +13,7 @@ super + shift + w
 super + shift + {1-9}
     bspc node -d '^{1-9}'
 super + shift + {Down,Up}
-    brightnessctl set {5-,+5}
+    brightnessctl set {1%-,+1%}
 super + w
     firefox
 super + e
