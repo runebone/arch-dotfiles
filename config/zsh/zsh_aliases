@@ -81,6 +81,7 @@ alias cfh='$e ~/.config/hypr/hyprland.conf'
 alias cfhp='$e ~/.config/hypr/hyprpaper.conf'
 alias cfw='$e ~/.config/waybar/config.jsonc'
 alias cfp='$e ~/.zprofile'
+alias cfk='$e ~/.config/keyd/default.conf'
 
 alias va='source .venv/bin/activate'
 alias ob='devour obsidian'

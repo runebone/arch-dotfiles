@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+_P=$HOME/Pictures/Screenshots/pic-sel-$(date +%y%m%d-%H%M-%S).png
+grim -g "$(slurp)" "$_P"
+wl-copy < "$_P"

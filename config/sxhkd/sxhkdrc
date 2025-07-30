@@ -40,8 +40,6 @@ super + shift + s
     _PATH_=$HOME/Pictures/Screenshots/pic-sel-$(date '+%y%m%d-%H%M-%S').png && maim -s --noopengl $_PATH_ && xclip -selection clipboard -t image/png $_PATH_
 super + p
     pavucontrol
-super + shift + q
-    systemctl suspend
 super + bracketleft
     bspc node -z left -120 0 || bspc node -z right -120 0
 super + bracketright
