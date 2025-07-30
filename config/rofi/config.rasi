@@ -1,0 +1,17 @@
+configuration {
+  modi: "drun,run,window,ssh";
+  show-icons: true;
+  icon-theme: "Papirus";
+  font: "Mononoki Nerd Font 12";
+  terminal: "alacritty";
+  drun-display-format: "{name}";
+  display-drun: " Applications:";
+  display-run: " Run:";
+  display-ssh: " SSH:";
+  display-window: " Window:";
+  location: 0;
+  sidebar-mode: false;
+  disable-history: false;
+  matching: "fuzzy";
+  case-sensitive: false;
+}
