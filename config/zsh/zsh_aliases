@@ -56,6 +56,7 @@ alias cdx='cd ~/.dotfiles/config/x11 && l'
 alias  cb='cd ~/Code/bmstu && l'
 alias   c='cd ~/Code && l'
 alias cdw='cd ~/Work && l'
+alias cdh='cd ~/.config/hypr && l'
 
 # All editing shortcuts are for dotfiles, so run Telescope from there
 function zsh_vim_edit_dotfiles {
