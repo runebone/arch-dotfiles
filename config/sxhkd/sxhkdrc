@@ -50,3 +50,5 @@ super + i
     sh $HOME/.dotfiles/scripts/switch_layout.sh
 super + x
     nmcli device connect wlp3s0
+super + z
+    killall sh
