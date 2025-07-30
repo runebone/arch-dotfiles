@@ -1,0 +1,2 @@
+#!/bin/bash
+sudo -u rukost HYPRLAND_INSTANCE_SIGNATURE=$(ls /run/user/$(id -u rukost)/hypr | tail -n1) hyprctl switchxkblayout at-translated-set-2-keyboard next
