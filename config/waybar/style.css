@@ -183,7 +183,10 @@ label:focus {
 }
 
 #backlight {
-    background-color: #90b1b1;
+    /* background-color: #90b1b1; */
+    /* background-color: #2d3436; */
+    background-color: #f1c40f;
+    color: #000000;
 }
 
 #network {
@@ -275,11 +278,16 @@ label:focus {
 }
 
 #language {
-    background: #00b093;
-    color: #740864;
+    /* background-color: #ecf0f1; */
+    /* color: #2d3436; */
+    background-color: #ed604f;
+    color: #000000;
+    /* background-color: #2d3436; */
+    /* background: #00b093; */
+    /* color: #740864; */
     padding: 0 5px;
-    margin: 0 5px;
-    min-width: 16px;
+    /* margin: 0 5px; */
+    /* min-width: 16px; */
 }
 
 #keyboard-state {
