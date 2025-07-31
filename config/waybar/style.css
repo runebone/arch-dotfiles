@@ -114,7 +114,8 @@ button:hover {
 }
 
 #clock {
-    background-color: #64727D;
+    /* background-color: #64727D; */
+    background-color: #2d3436;
 }
 
 #battery {
