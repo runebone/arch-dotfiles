@@ -1,0 +1,11 @@
+# Static table lookup for hostnames.
+# See hosts(5) for details.
+127.0.0.1        localhost
+::1              localhost
+
+# VPN bypass for Go
+142.250.187.17   proxy.golang.org
+142.250.187.17   sum.golang.org
+216.239.37.1     golang.org
+20.248.137.48    github.com
+185.199.111.133  raw.githubusercontent.com
