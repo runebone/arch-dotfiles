@@ -7,6 +7,12 @@ local setup = function()
             ["<C-k>"] = false,
             ["<C-j>"] = false,
             -- ["<M-h>"] = "actions.select_split",
+            ["<leader>cd"] = function()
+              local oil = require("oil")
+              local dir = oil.get_current_dir()
+              vim.cmd("cd " .. dir)
+              print("cwd set to: " .. dir)
+            end,
         },
         view_options = {
             show_hidden = true,

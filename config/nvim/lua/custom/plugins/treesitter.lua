@@ -6,7 +6,6 @@ local setup = function()
         };
 
         ensure_installed = { "c", "lua", "markdown" },
-
     })
 
     require('treesitter-context').setup({
