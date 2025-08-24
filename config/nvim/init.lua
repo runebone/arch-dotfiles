@@ -61,6 +61,9 @@ vim.keymap.set("i", "[<CR>", "[<CR>]<C-o>O")
 -- Git stuff for work
 vim.keymap.set("n", "<leader>s", "!!git rev-parse --abbrev-ref HEAD | sed 's/.*\\///' | sed 's/-/ /g' | awk '{printf toupper($1)\"-\"$2\": \"}'<CR>A")
 
+-- Yes
+vim.keymap.set("i", "<C-c>", "<Esc>")
+
 -- vim.keymap.set('n', '<leader>cd', function()
 --   vim.cmd('lcd %:p:h')
 --   print('Changed local cwd to: ' .. vim.fn.getcwd())
