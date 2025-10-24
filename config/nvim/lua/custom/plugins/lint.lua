@@ -12,6 +12,12 @@ local setup = function()
 end
 
 return {
-    "mfussenegger/nvim-lint",
-    config = setup
+    {
+        "mfussenegger/nvim-lint",
+        config = setup
+    },
+    {
+        "stevearc/conform.nvim",
+        opts = {},
+    }
 }
