@@ -107,6 +107,8 @@ local setup = function()
             }
         },
         on_attach = function(_, bufnr)
+            lsp_attach(_, bufnr)
+
             -- Автоформатирование при сохранении
             vim.api.nvim_create_autocmd("BufWritePre", {
               buffer = bufnr,
