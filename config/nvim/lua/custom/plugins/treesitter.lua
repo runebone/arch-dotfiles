@@ -5,7 +5,8 @@ local setup = function()
             enable = true,
         };
 
-        ensure_installed = { "c", "lua", "markdown" },
+        ensure_installed = { "c", "lua", "markdown", "go", "gomod", "gowork", "json" },
+        auto_install = true,
     })
 
     require('treesitter-context').setup({

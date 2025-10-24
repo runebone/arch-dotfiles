@@ -81,13 +81,17 @@ local setup = function()
         capabilities = lsp_capabilities
     }
 
-    local lspconfig = require('lspconfig')
-
-    lspconfig.clangd.setup(config)
-    -- lspconfig.gopls.setup(config)
-    lspconfig.gopls.setup({
-        on_attach = lsp_attach,
+    -- Новый API vim.lsp.config
+    vim.lsp.config('*', {
         capabilities = lsp_capabilities,
+        on_attach = lsp_attach,
+    })
+
+    -- Настройка clangd
+    vim.lsp.config.clangd = {}
+
+    -- Настройка gopls
+    vim.lsp.config.gopls = {
         settings = {
             gopls = {
                 buildFlags = {"-tags=unit,integration,e2e"},
@@ -102,12 +106,13 @@ local setup = function()
                 gofumpt = true,
             }
         }
-    })
-    lspconfig.ruff.setup(config)
-    lspconfig.pyright.setup(config)
-    lspconfig.lua_ls.setup({
-        on_attach = config.on_attach,
-        capabilities = config.capabilities,
+    }
+
+    -- Настройка остальных серверов
+    vim.lsp.config.ruff = {}
+    vim.lsp.config.pyright = {}
+
+    vim.lsp.config.lua_ls = {
         settings = {
             Lua = {
                 diagnostics = {
@@ -115,9 +120,52 @@ local setup = function()
                 }
             }
         }
-    })
-    lspconfig.bashls.setup(config)
-    lspconfig.texlab.setup(config)
+    }
+
+    vim.lsp.config.bashls = {}
+    vim.lsp.config.texlab = {}
+
+    -- Автозапуск LSP серверов
+    vim.lsp.enable({'clangd', 'gopls', 'ruff', 'pyright', 'lua_ls', 'bashls', 'texlab'})
+
+    -- -- local lspconfig = require('lspconfig')
+    -- local lspconfig = vim.lsp.config
+    --
+    -- lspconfig.clangd.setup(config)
+    -- -- lspconfig.gopls.setup(config)
+    -- lspconfig.gopls.setup({
+    --     on_attach = lsp_attach,
+    --     capabilities = lsp_capabilities,
+    --     settings = {
+    --         gopls = {
+    --             buildFlags = {"-tags=unit,integration,e2e"},
+    --             analyses = {
+    --                 unusedparams = true,
+    --             },
+    --             staticcheck = true,
+    --             codelenses = {
+    --                 generate = true,
+    --                 gc_details = true,
+    --             },
+    --             gofumpt = true,
+    --         }
+    --     }
+    -- })
+    -- lspconfig.ruff.setup(config)
+    -- lspconfig.pyright.setup(config)
+    -- lspconfig.lua_ls.setup({
+    --     on_attach = config.on_attach,
+    --     capabilities = config.capabilities,
+    --     settings = {
+    --         Lua = {
+    --             diagnostics = {
+    --                 globals = { "vim" }
+    --             }
+    --         }
+    --     }
+    -- })
+    -- lspconfig.bashls.setup(config)
+    -- lspconfig.texlab.setup(config)
 end
 
 return {
