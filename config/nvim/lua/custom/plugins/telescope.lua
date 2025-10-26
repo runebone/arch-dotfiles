@@ -16,6 +16,12 @@ local setup = function()
     vim.keymap.set('n', '<leader>vr', builtin.registers, {})
     vim.keymap.set('n', '<leader>vp', builtin.man_pages, {})
     vim.keymap.set('n', '<leader>rg', builtin.live_grep, {})
+
+    vim.keymap.set('n', '<leader>j', function()
+      vim.cmd('normal! yiw')
+      local text = vim.fn.getreg('+')
+      builtin.live_grep({ default_text = text })
+    end, { desc = "Telescope live_grep с текстом из буфера обмена" })
 end
 
 return {
