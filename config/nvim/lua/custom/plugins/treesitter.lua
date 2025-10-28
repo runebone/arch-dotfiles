@@ -7,10 +7,34 @@ local setup = function()
 
         ensure_installed = { "c", "lua", "markdown", "go", "gomod", "gowork", "json" },
         auto_install = true,
+
+        -- Enable movements powered by Treesitter textobjects
+        textobjects = {
+            move = {
+                enable = true,
+                set_jumps = true,
+                goto_previous_start = {
+                    ["[m"] = "@function.outer",
+                    ["[c"] = "@class.outer",
+                },
+                goto_next_start = {
+                    ["]m"] = "@function.outer",
+                    ["]c"] = "@class.outer",
+                },
+                goto_previous_end = {
+                    ["[M"] = "@function.outer",
+                    ["[C"] = "@class.outer",
+                },
+                goto_next_end = {
+                    ["]M"] = "@function.outer",
+                    ["]C"] = "@class.outer",
+                },
+            },
+        },
     })
 
     require('treesitter-context').setup({
-        enable = false, -- Enable this plugin (Can be enabled/disabled later via commands)
+        enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
         max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
         min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
         line_numbers = true,
