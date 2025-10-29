@@ -17,6 +17,33 @@ local setup = function()
     vim.keymap.set('n', '<leader>vp', builtin.man_pages, {})
     vim.keymap.set('n', '<leader>rg', builtin.live_grep, {})
 
+    -- Visual mode: live_grep with selected text as default
+    local function get_last_visual_selection()
+        local _, ls, cs = unpack(vim.fn.getpos("'<"))
+        local _, le, ce = unpack(vim.fn.getpos("'>"))
+        if ls == 0 or le == 0 then return '' end
+        local lines = vim.fn.getline(ls, le)
+        if #lines == 0 then return '' end
+        lines[#lines] = string.sub(lines[#lines], 1, ce)
+        lines[1] = string.sub(lines[1], cs)
+        local text = table.concat(lines, ' ')
+        return text
+    end
+
+    vim.keymap.set('v', '<leader>rg', function()
+        -- exit visual so marks '< and '>' are set to current selection
+        local esc = vim.api.nvim_replace_termcodes('<Esc>', true, false, true)
+        vim.api.nvim_feedkeys(esc, 'nx', false)
+        vim.schedule(function()
+            local text = get_last_visual_selection()
+            if text == '' then
+                builtin.live_grep()
+            else
+                builtin.live_grep({ default_text = text })
+            end
+        end)
+    end, { desc = 'Telescope live_grep with visual selection', silent = true })
+
     vim.keymap.set('n', '<leader>j', function()
       local pickers = require('telescope.pickers')
       local finders = require('telescope.finders')
