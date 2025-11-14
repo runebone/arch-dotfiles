@@ -28,4 +28,5 @@ return {
       end
     },
     { "Vimjas/vim-python-pep8-indent" },
+    { "powerman/vim-plugin-AnsiEsc" },
 }
