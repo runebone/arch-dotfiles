@@ -34,8 +34,10 @@ alias zoom='zoom'
 alias vb='virtualbox'
 alias pl='nordvpn c Poland'
 alias xx='wl-copy'
+alias rs='rsync -avzP --append-verify'
+alias gats='sh ~/.local/work-scripts/get-stage-access-token.sh'
 
-alias  u='cd ~/University && l'
+alias  u='cd ~/Code/university && l'
 alias  D='cd ~/Downloads && l'
 alias  d='cd ~/Documents && l'
 alias  p='cd ~/Pictures && ls'
@@ -59,6 +61,7 @@ alias  cb='cd ~/Code/bmstu && l'
 alias   c='cd ~/Code && l'
 alias cdw='cd ~/Work && l'
 alias cdh='cd ~/.config/hypr && l'
+alias cdws='cd ~/.local/work-scripts && l'
 
 # All editing shortcuts are for dotfiles, so run Telescope from there
 function zsh_vim_edit_dotfiles {
