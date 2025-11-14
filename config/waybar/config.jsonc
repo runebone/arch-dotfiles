@@ -25,6 +25,7 @@
         "power-profiles-daemon",
         "cpu",
         "memory",
+        "custom/top-process",
         "temperature",
         "backlight",
         // "keyboard-state",
@@ -124,7 +125,10 @@
         "tooltip": false
     },
     "memory": {
-        "format": "{}% "
+        "interval": 5,
+        "format": "{used:0.1f}G/{total:0.1f}G ",
+        "tooltip-format": "RAM: {used:0.1f}G / {total:0.1f}G ({percentage}%)\nSwap: {swapUsed:0.1f}G / {swapTotal:0.1f}G",
+        "on-click": "alacritty -e htop"
     },
     "temperature": {
         // "thermal-zone": 2,
@@ -219,5 +223,13 @@
 			"suspend": "systemctl suspend",
 			"hibernate": "systemctl hibernate"
 		}
+    },
+    "custom/top-process": {
+        "format": " {}",
+        "return-type": "json",
+        "interval": 3,
+        "exec": "$HOME/.config/waybar/top-process.sh",
+        "on-click": "kill -9 $(ps aux --sort=-%mem | awk 'NR>1 && $11 !~ /^\\[/ {print $2; exit}')",
+        "tooltip": true
     }
 }
