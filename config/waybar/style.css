@@ -179,7 +179,8 @@ label:focus {
 }
 
 #disk {
-    background-color: #964B00;
+    background-color: #95a5a6;
+    color: #ffffff;
 }
 
 #backlight {

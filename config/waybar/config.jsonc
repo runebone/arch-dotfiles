@@ -24,6 +24,7 @@
         "network",
         "power-profiles-daemon",
         "cpu",
+        "disk",
         "memory",
         "custom/top-process",
         "temperature",
@@ -123,6 +124,12 @@
     "cpu": {
         "format": "{usage}% ",
         "tooltip": false
+    },
+    "disk": {
+        "interval": 30,
+        "format": "{percentage_used}% ",
+        "path": "/",
+        "tooltip-format": "Used: {used} / {total} ({percentage_used}%)\nFree: {free} ({percentage_free}%)"
     },
     "memory": {
         "interval": 5,
