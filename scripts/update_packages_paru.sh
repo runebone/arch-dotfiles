@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # Check for updates
-sudo paru -Sy && paru -Qu | grep -q "." > /dev/null
+# sudo paru -Sy && paru -Qu | grep -q "." > /dev/null
+paru -Sy && paru -Qu | grep -q "." > /dev/null
 
 if [ $? != 0 ]; then
     echo "There is no updates."
@@ -10,7 +11,8 @@ else
     prev_pkgs=$(paru -Qe)
 
     # Update packages; Redirect stderr to stdout
-    sudo paru -Syu 2>&1
+    # sudo paru -Syu 2>&1
+    paru -Syu 2>&1
 
     if [ $? == 0 ]; then
         # Update done
