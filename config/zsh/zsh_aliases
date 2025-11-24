@@ -92,3 +92,5 @@ alias cfk='$e ~/.config/keyd/default.conf'
 alias va='source .venv/bin/activate'
 alias ob='obsidian'
 alias hl='hyprland'
+
+alias sgp='ssh root@stage -C "cd /home/sql-query-portal && git pull"'
