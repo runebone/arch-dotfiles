@@ -25,3 +25,6 @@ opt.wrap = true
 opt.linebreak = true
 
 opt.termguicolors = true
+
+-- Fix emoji rendering
+opt.ambiwidth = "single"

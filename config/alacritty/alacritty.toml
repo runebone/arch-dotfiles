@@ -25,6 +25,24 @@ foreground = "#fce8c3"
 [font]
 size = 14.0
 
+[font.normal]
+family = "monospace"
+style = "Regular"
+
+[font.bold]
+family = "monospace"
+style = "Bold"
+
+[font.italic]
+family = "monospace"
+style = "Italic"
+
+[font.bold_italic]
+family = "monospace"
+style = "Bold Italic"
+
+# Emoji support via fontconfig fallback
+
 [[keyboard.bindings]]
 action = "ScrollLineDown"
 key = "J"
