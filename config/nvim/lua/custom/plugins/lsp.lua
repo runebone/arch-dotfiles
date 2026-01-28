@@ -97,6 +97,7 @@ local setup = function()
                 buildFlags = {"-tags=unit,integration,e2e"},
                 analyses = {
                     unusedparams = true,
+                    -- modernize = false, // interface{} -> any, etc.
                 },
                 staticcheck = true,
                 codelenses = {

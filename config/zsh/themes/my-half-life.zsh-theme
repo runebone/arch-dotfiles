@@ -22,6 +22,7 @@
   purple="%{${(%):-"%F{magenta}"}%}"
   hotpink="%{${(%):-"%F{red}"}%}"
   limegreen="%{${(%):-"%F{green}"}%}"
+  gray="%{${(%):-"%F{gray}"}%}"
 # fi
 
 autoload -Uz vcs_info
@@ -97,5 +98,5 @@ ZSH_THEME_VIRTUALENV_SUFFIX="%{$reset_color%}"
 
 setopt prompt_subst
 # PROMPT="${purple}%n%{$reset_color%} in ${limegreen}%~%{$reset_color%}\$(virtualenv_prompt_info)\$(ruby_prompt_info)\$vcs_info_msg_0_${orange} λ%{$reset_color%} " # λ
-# PROMPT="%B${purple}%n%{$reset_color%} in %B${limegreen}%~%{$reset_color%}%B\$(virtualenv_prompt_info)%B\$(ruby_prompt_info)%B\$vcs_info_msg_0_%B${orange}%{$reset_color%} " # λ
-PROMPT="%B${purple}%n%{$reset_color%} in %B${limegreen}%~%{$reset_color%}%B\$(virtualenv_prompt_info)%B\$(ruby_prompt_info)%B\$vcs_info_msg_0_%B${orange}%{$reset_color%} " # λ
+# PROMPT="%B${myblue}[%T]%{$reset_color%} %B${purple}%n%{$reset_color%} in %B${limegreen}%~%{$reset_color%}%B\$(virtualenv_prompt_info)%B\$(ruby_prompt_info)%B\$vcs_info_msg_0_%B${orange}%{$reset_color%} " # λ
+PROMPT="%B${gray}%T%{$reset_color%} %B${purple}%n%{$reset_color%} in %B${limegreen}%~%{$reset_color%}%B\$(virtualenv_prompt_info)%B\$(ruby_prompt_info)%B\$vcs_info_msg_0_%B${orange}%{$reset_color%} " # λ
