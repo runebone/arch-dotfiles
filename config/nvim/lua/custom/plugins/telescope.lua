@@ -1,5 +1,23 @@
 local setup = function()
+    require("telescope").setup {
+        pickers = {
+            find_files = {
+                theme = "ivy"
+            }
+        },
+        extensions = {
+            fzf = {}
+        }
+    }
+    require("telescope").load_extension("fzf")
+
     local builtin = require("telescope.builtin")
+
+    vim.keymap.set("n", "<leader>ep", function()
+        builtin.find_files {
+            cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy")
+        }
+    end)
 
     -- Not "ff" just to type it faster with alternate fingers
     vim.keymap.set("n", "<leader>pf", builtin.find_files, {})
@@ -16,6 +34,9 @@ local setup = function()
     vim.keymap.set('n', '<leader>vr', builtin.registers, {})
     vim.keymap.set('n', '<leader>vp', builtin.man_pages, {})
     vim.keymap.set('n', '<leader>rg', builtin.live_grep, {})
+
+    local multigrep = require("config.telescope.multigrep")
+    vim.keymap.set("n", "<leader>fg", multigrep.run, {})
 
     -- Visual mode: live_grep with selected text as default
     local function get_last_visual_selection()
@@ -79,6 +100,9 @@ end
 
 return {
     "nvim-telescope/telescope.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    dependencies = {
+        "nvim-lua/plenary.nvim",
+        { "nvim-telescope/telescope-fzf-native.nvim", build = "make" }
+    },
     config = setup
 }

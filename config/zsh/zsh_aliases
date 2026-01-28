@@ -36,7 +36,7 @@ alias xx='wl-copy'
 alias rs='rsync -avzP --append-verify'
 alias gats='sh ~/.local/work-scripts/get-stage-access-token.sh'
 
-alias  u='cd ~/Code/university && l'
+alias  u='cd ~/University && l'
 alias  D='cd ~/Downloads && l'
 alias  d='cd ~/Documents && l'
 alias  p='cd ~/Pictures && ls'
@@ -93,7 +93,7 @@ alias va='source .venv/bin/activate'
 alias ob='obsidian'
 alias hl='hyprland'
 
-alias sgp='ssh root@stage -C "cd /home/sql-query-portal && git pull"'
+alias sgp='ssh root@stage.pro-rabota.com -C "cd /home/sql-query-portal && git pull"'
 alias sbfree='sh ~/.local/work-scripts/free-sb-stage.sh'
 alias cid='sh ~/.local/work-scripts/get-cid.sh'
 alias first="awk '{print \$1}'"

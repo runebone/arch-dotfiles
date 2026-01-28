@@ -35,6 +35,7 @@ SetGruvbox()
 vim.cmd [[ au TextYankPost * silent! lua vim.highlight.on_yank { timeout=100 } ]]
 
 vim.keymap.set("n", "<leader>x", ":.lua<CR>", { desc = "Execute the current line" })
+vim.keymap.set("n", "<leader><leader>x", ":source %<CR>", { desc = "Source the current file" })
 
 function ToggleWrapLines()
     if vim.o.wrap then
