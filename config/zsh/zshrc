@@ -11,7 +11,7 @@ export EDITOR=nvim
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="robbyrussell"
 
-# NOTE: There is a symlink to /home/rukost/.dotfiles/config/zsh/themes/my-half-life.zsh-theme in ~/.oh-my-zsh/themes
+# NOTE: There is a symlink to ~/.dotfiles/config/zsh/themes/my-half-life.zsh-theme in ~/.oh-my-zsh/themes
 ZSH_THEME="my-half-life"
 
 # Set list of themes to pick from when loading at random

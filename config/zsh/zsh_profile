@@ -12,8 +12,8 @@ export PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$PATH"
 export PATH="$ANDROID_HOME/android-studio/bin:$PATH"
 export PATH="$HOME/.pub-cache/bin:$PATH"
 export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
-export LUA_PATH="/usr/share/lua/5.4/?.lua;/usr/local/share/lua/5.4/?.lua;/usr/local/share/lua/5.4/?/init.lua;/usr/share/lua/5.4/?/init.lua;/usr/local/lib/lua/5.4/?.lua;/usr/local/lib/lua/5.4/?/init.lua;/usr/lib/lua/5.4/?.lua;/usr/lib/lua/5.4/?/init.lua;./?.lua;./?/init.lua;/home/rukost/.luarocks/share/lua/5.4/?.lua;/home/rukost/.luarocks/share/lua/5.4/?/init.lua"
-export LUA_CPATH="/usr/local/lib/lua/5.4/?.so;/usr/lib/lua/5.4/?.so;/usr/local/lib/lua/5.4/loadall.so;/usr/lib/lua/5.4/loadall.so;./?.so;/home/rukost/.luarocks/lib/lua/5.4/?.so"
+export LUA_PATH="/usr/share/lua/5.4/?.lua;/usr/local/share/lua/5.4/?.lua;/usr/local/share/lua/5.4/?/init.lua;/usr/share/lua/5.4/?/init.lua;/usr/local/lib/lua/5.4/?.lua;/usr/local/lib/lua/5.4/?/init.lua;/usr/lib/lua/5.4/?.lua;/usr/lib/lua/5.4/?/init.lua;./?.lua;./?/init.lua;/home/defuser/.luarocks/share/lua/5.4/?.lua;/home/defuser/.luarocks/share/lua/5.4/?/init.lua"
+export LUA_CPATH="/usr/local/lib/lua/5.4/?.so;/usr/lib/lua/5.4/?.so;/usr/local/lib/lua/5.4/loadall.so;/usr/lib/lua/5.4/loadall.so;./?.so;/home/defuser/.luarocks/lib/lua/5.4/?.so"
 export CHROME_EXECUTABLE="/usr/bin/google-chrome-stable"
 
 # t y o p ] \ a s f k z n - available letters to bind Ctrl+
