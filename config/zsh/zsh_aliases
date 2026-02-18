@@ -97,3 +97,197 @@ alias sgp='ssh root@stage.pro-rabota.com -C "cd /home/sql-query-portal && git pu
 alias sbfree='sh ~/.local/work-scripts/free-sb-stage.sh'
 alias cid='sh ~/.local/work-scripts/get-cid.sh'
 alias first="awk '{print \$1}'"
+
+# git worktree: interactive project/mode/branch selection via fzf, creates worktree and cds into it
+function gwtx() {
+    local -a fzf_base=(fzf --height=40% --layout=reverse --border)
+
+    # Step 1: Project
+    local project
+    project=$(printf "backend\nfrontend" | "${fzf_base[@]}" --prompt="Project > ")
+    [[ -z "$project" ]] && { echo "Cancelled."; return 0 }
+
+    local bare_dir work_dir
+    if [[ "$project" == "backend" ]]; then
+        bare_dir="$HOME/Work/bare"
+        work_dir="$HOME/Work"
+    else
+        bare_dir="$HOME/Work/frontend/bare"
+        work_dir="$HOME/Work/frontend"
+    fi
+
+    if [[ ! -d "$bare_dir" ]]; then
+        echo "Error: bare repo not found at $bare_dir"
+        return 1
+    fi
+
+    # Step 2: Mode
+    local mode
+    mode=$(printf "existing branch\nsuffix to existing\nnew branch" | "${fzf_base[@]}" --prompt="[$project] Mode > ")
+    [[ -z "$mode" ]] && { echo "Cancelled."; return 0 }
+
+    # Helper: pick branch (strips *, +, spaces; deduplicates; shows commit preview)
+    _gwtx_pick_branch() {
+        git -C "$bare_dir" branch -a \
+            | sed 's|^[*+ ]*||; s|^remotes/origin/||' \
+            | grep -v '^HEAD' \
+            | sort -u \
+            | fzf --height=50% --layout=reverse --border \
+                --prompt="$1" \
+                --preview="git -C $bare_dir log --oneline --color=always --decorate {} 2>/dev/null | head -20" \
+                --preview-window=right:60%
+    }
+
+    # Helper: pick local branch, already-in-worktree branches (+ prefix) sorted first
+    _gwtx_pick_existing_branch() {
+        {
+            git -C "$bare_dir" branch | grep '^+ ' | sed 's|^+ ||'
+            git -C "$bare_dir" branch | grep -v '^+ ' | sed 's|^[* ]*||'
+        } | awk '!seen[$0]++' \
+          | fzf --height=50% --layout=reverse --border \
+                --prompt="$1" \
+                --preview="git -C $bare_dir log --oneline --color=always --decorate {} 2>/dev/null | head -20" \
+                --preview-window=right:60%
+    }
+
+    local new_branch worktree_path
+
+    if [[ "$mode" == "new branch" ]]; then
+        # Step 3: Type
+        local type
+        type=$(printf "feat\nfix\nhotfix\nrefactor\nchore\ndocs" | "${fzf_base[@]}" --prompt="[$project] Type > ")
+        [[ -z "$type" ]] && { echo "Cancelled."; return 0 }
+
+        # Step 4: Name
+        echo -n "[$project] Name: "
+        read -r name
+        [[ -z "$name" ]] && { echo "Cancelled."; return 0 }
+
+        # Step 5: Base branch
+        local base
+        base=$(_gwtx_pick_branch "[$project] Base branch > ")
+        [[ -z "$base" ]] && { echo "Cancelled."; return 0 }
+
+        new_branch="$type/$name"
+        worktree_path="$work_dir/$name"
+
+        echo ""
+        echo "  Project:  $project"
+        echo "  Worktree: $worktree_path"
+        echo "  Branch:   $new_branch"
+        echo "  Based on: $base"
+        echo ""
+
+        git -C "$bare_dir" worktree add "$worktree_path" "$base" -b "$new_branch" || return 1
+
+    elif [[ "$mode" == "suffix to existing" ]]; then
+        # Step 3: Existing branch
+        local branch
+        branch=$(_gwtx_pick_branch "[$project] Base branch > ")
+        [[ -z "$branch" ]] && { echo "Cancelled."; return 0 }
+
+        # Step 4: Suffix
+        echo -n "[$project] Suffix (e.g. 42-add-feature): "
+        read -r suffix
+        [[ -z "$suffix" ]] && { echo "Cancelled."; return 0 }
+
+        new_branch="${branch}-${suffix}"
+        worktree_path="$work_dir/$suffix"
+
+        echo ""
+        echo "  Project:  $project"
+        echo "  Worktree: $worktree_path"
+        echo "  Branch:   $new_branch"
+        echo "  Based on: $branch"
+        echo ""
+
+        git -C "$bare_dir" worktree add "$worktree_path" "$branch" -b "$new_branch" || return 1
+
+    else
+        # Step 3: Existing branch — checkout as-is, no new branch created
+        local branch
+        branch=$(_gwtx_pick_existing_branch "[$project] Branch > ")
+        [[ -z "$branch" ]] && { echo "Cancelled."; return 0 }
+
+        # If branch is already checked out in a worktree — just cd there
+        local existing_path
+        existing_path=$(git -C "$bare_dir" worktree list | grep "\[$branch\]" | awk '{print $1}')
+        if [[ -n "$existing_path" ]]; then
+            echo "Already checked out: $existing_path"
+            cd "$existing_path"
+            return 0
+        fi
+
+        # folder name: slashes → dashes
+        worktree_path="$work_dir/${branch//\//-}"
+
+        echo ""
+        echo "  Project:  $project"
+        echo "  Worktree: $worktree_path"
+        echo "  Branch:   $branch"
+        echo ""
+
+        git -C "$bare_dir" worktree add "$worktree_path" "$branch" || return 1
+    fi
+
+    cd "$worktree_path"
+}
+
+# git worktree remove: select worktree via fzf, auto-detects project from cwd
+function gwtrmx() {
+    local -a fzf_base=(fzf --height=40% --layout=reverse --border)
+    local cwd="$PWD"
+
+    # Auto-detect project from current directory, otherwise ask
+    local project bare_dir
+    if [[ "$cwd" == "$HOME/Work/frontend"* && "$cwd" != "$HOME/Work/frontend/bare"* ]]; then
+        project="frontend"
+        bare_dir="$HOME/Work/frontend/bare"
+    elif [[ "$cwd" == "$HOME/Work"* && "$cwd" != "$HOME/Work/bare"* && "$cwd" != "$HOME/Work/frontend"* ]]; then
+        project="backend"
+        bare_dir="$HOME/Work/bare"
+    else
+        project=$(printf "backend\nfrontend" | "${fzf_base[@]}" --prompt="Project > ")
+        [[ -z "$project" ]] && { echo "Cancelled."; return 0 }
+        if [[ "$project" == "backend" ]]; then
+            bare_dir="$HOME/Work/bare"
+        else
+            bare_dir="$HOME/Work/frontend/bare"
+        fi
+    fi
+
+    # Pre-fill fzf query with current worktree name if we're inside one
+    local query=""
+    local wt_path
+    while IFS= read -r wt_path; do
+        if [[ "$cwd" == "$wt_path"* ]]; then
+            query=$(basename "$wt_path")
+            break
+        fi
+    done < <(git -C "$bare_dir" worktree list | grep -v '(bare)' | awk '{print $1}')
+
+    local selected
+    selected=$(
+        git -C "$bare_dir" worktree list \
+            | grep -v '(bare)' \
+            | "${fzf_base[@]}" \
+                --prompt="[$project] Remove worktree > " \
+                --query="$query" \
+                --no-preview
+    )
+    [[ -z "$selected" ]] && { echo "Cancelled."; return 0 }
+
+    local worktree_path
+    worktree_path=$(echo "$selected" | awk '{print $1}')
+
+    # If removing current worktree — cd out first
+    if [[ "$cwd" == "$worktree_path"* ]]; then
+        cd "$bare_dir"
+    fi
+
+    echo ""
+    echo "  Removing: $worktree_path"
+    echo ""
+
+    git -C "$bare_dir" worktree remove "$worktree_path"
+}
