@@ -65,6 +65,12 @@ vim.keymap.set("n", "<leader>s", "!!git rev-parse --abbrev-ref HEAD | sed 's/.*\
 -- Yes
 vim.keymap.set("i", "<C-c>", "<Esc>")
 
+vim.keymap.set("n", "<leader>ff", function()
+    local path = vim.fn.expand("%:p")
+    vim.fn.setreg("+", path)
+    print("Copied: " .. path)
+end, { desc = "Copy current file path to clipboard" })
+
 -- vim.keymap.set('n', '<leader>cd', function()
 --   vim.cmd('lcd %:p:h')
 --   print('Changed local cwd to: ' .. vim.fn.getcwd())
