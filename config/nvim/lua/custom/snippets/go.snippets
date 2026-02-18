@@ -1,0 +1,14 @@
+snippet dbh
+	log := slog.With("op", "DB.${1:CRM}", "${2:candidate_id}", ${3:candidateID})
+
+	c, cancel := context.WithTimeout(ctx, time.Duration(time.Minute*1))
+	defer cancel()
+
+	tx, err := d.p.BeginTx(c, pgx.TxOptions{})
+	if err != nil {
+		log.Error("failed to start transaction", "error", err)
+		return fmt.Errorf("can't start transaction: %w", err)
+	}
+	defer func() {
+		d.closeTx(tx, c, err)
+	}()$0
