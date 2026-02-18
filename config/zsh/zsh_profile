@@ -17,6 +17,7 @@ export LUA_CPATH="/usr/local/lib/lua/5.4/?.so;/usr/lib/lua/5.4/?.so;/usr/local/l
 export CHROME_EXECUTABLE="/usr/bin/google-chrome-stable"
 
 # t y o p ] \ a s f k z n - available letters to bind Ctrl+
+# k - git worktree (gwtx)
 
 bindkey -s "^t" "tmux-sessionizer\n"
 bindkey -s "^f" 'cd "$(dirname "$(fzf)")"\n'
@@ -24,3 +25,5 @@ bindkey -s "^o" 'fzf_file=$(fzf) && [ $fzf_file ] && vim $fzf_file\n'
 bindkey -s "^y" "yazi\n"
 bindkey -s "^p" 'fzf_file=$(fzf) && [ $fzf_file ] && python $fzf_file\n'
 bindkey -s "^s" 'fzf_file=$(fzf) && [ $fzf_file ] && xdg-open $fzf_file\n'
+bindkey -s "^k" "gwtx\n"
+bindkey -s "^]" "gwtrmx\n"
