@@ -138,11 +138,12 @@ function gwtx() {
                 --preview-window=right:60%
     }
 
-    # Helper: pick local branch, already-in-worktree branches (+ prefix) sorted first
+    # Helper: pick local branch, already-in-worktree branches (+ prefix) sorted first; remote-only branches appended
     _gwtx_pick_existing_branch() {
         {
             git -C "$bare_dir" branch | grep '^+ ' | sed 's|^+ ||'
             git -C "$bare_dir" branch | grep -v '^+ ' | sed 's|^[* ]*||'
+            git -C "$bare_dir" branch -r | sed 's|^[*+ ]*||; s|^origin/||' | grep -v '^HEAD'
         } | awk '!seen[$0]++' \
           | fzf --height=50% --layout=reverse --border \
                 --prompt="$1" \
@@ -169,7 +170,7 @@ function gwtx() {
         [[ -z "$base" ]] && { echo "Cancelled."; return 0 }
 
         new_branch="$type/$name"
-        worktree_path="$work_dir/$name"
+        worktree_path="$work_dir/${new_branch//\//-}"
 
         echo ""
         echo "  Project:  $project"
