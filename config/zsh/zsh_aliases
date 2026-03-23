@@ -156,7 +156,7 @@ function gwtx() {
     if [[ "$mode" == "new branch" ]]; then
         # Step 3: Type
         local type
-        type=$(printf "feat\nfix\nhotfix\nrefactor\nchore\ndocs" | "${fzf_base[@]}" --prompt="[$project] Type > ")
+        type=$(printf "temp\ntest\nfeat\nfix\nhotfix\nrefactor\nchore\ndocs" | "${fzf_base[@]}" --prompt="[$project] Type > ")
         [[ -z "$type" ]] && { echo "Cancelled."; return 0 }
 
         # Step 4: Name
