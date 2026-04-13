@@ -93,6 +93,8 @@ alias va='source .venv/bin/activate'
 alias ob='obsidian'
 alias hl='hyprland'
 
+alias AmneziaVPN='QT_QPA_PLATFORM=xcb AmneziaVPN'
+
 alias sgp='ssh root@stage.pro-rabota.com -C "cd /home/sql-query-portal && git pull"'
 alias sbfree='sh ~/.local/work-scripts/free-sb-stage.sh'
 alias cid='sh ~/.local/work-scripts/get-cid.sh'
