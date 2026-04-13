@@ -33,7 +33,7 @@ alias drawio='drawio'
 alias zoom='zoom'
 alias vb='virtualbox'
 alias xx='wl-copy'
-alias rs='rsync -avzP --append-verify'
+alias rs='rsync -avzhP --append-verify'
 alias gats='sh ~/.local/work-scripts/get-stage-access-token.sh'
 
 alias  u='cd ~/University && l'
