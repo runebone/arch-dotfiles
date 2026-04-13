@@ -11,3 +11,4 @@ else
     echo $! > "$PID_FILE"
     notify-send -u critical "Keylogger" "Started — logging input" -i security-high
 fi
+pkill -SIGRTMIN+1 waybar

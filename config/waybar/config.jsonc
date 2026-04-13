@@ -19,6 +19,7 @@
     "modules-right": [
         // "mpd",
         "idle_inhibitor",
+        "custom/keylogger",
         "hyprland/language",
         "pulseaudio",
         "network",
@@ -230,6 +231,14 @@
 			"suspend": "systemctl suspend",
 			"hibernate": "systemctl hibernate"
 		}
+    },
+    "custom/keylogger": {
+        "format": "{}",
+        "return-type": "json",
+        "interval": 2,
+        "exec": "$HOME/.dotfiles/scripts/keylogger-status.sh",
+        "signal": 1,
+        "on-click": "sh ~/.dotfiles/scripts/keylogger-toggle.sh"
     },
     "custom/top-process": {
         "format": " {}",
