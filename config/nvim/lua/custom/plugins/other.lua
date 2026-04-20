@@ -14,8 +14,11 @@ return {
             require("lualine").setup()
         end
     },
-    -- { "fatih/vim-go" },
-    { "norcalli/nvim-colorizer.lua", config = function()
+    -- -- { "fatih/vim-go" },
+    -- { "norcalli/nvim-colorizer.lua", config = function()
+    --     require("colorizer").setup({ "*" }, { names = false })
+    -- end },
+    { "catgoose/nvim-colorizer.lua", config = function()
         require("colorizer").setup({ "*" }, { names = false })
     end },
     {
