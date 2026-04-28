@@ -12,7 +12,10 @@ local setup = function()
             if vim.tbl_contains(available, ft) then
                 require('nvim-treesitter').install({ ft })
             end
-            pcall(vim.treesitter.start)
+            local installed = require('nvim-treesitter').get_installed()
+            if vim.tbl_contains(installed, ft) then
+                pcall(vim.treesitter.start)
+            end
         end,
     })
 
