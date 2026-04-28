@@ -1,60 +1,54 @@
 local setup = function()
-    require('nvim-treesitter.configs').setup({
-        -- Equivalent to ":TSEnable highlight"
-        highlight = {
-            enable = true,
-        };
+    require('nvim-treesitter').setup()
 
-        ensure_installed = { "c", "lua", "markdown", "go", "gomod", "gowork", "json" },
-        auto_install = true,
+    -- Install parsers on startup
+    require('nvim-treesitter').install({ "c", "lua", "markdown", "go", "gomod", "gowork", "json" })
 
-        -- Enable movements powered by Treesitter textobjects
-        textobjects = {
-            move = {
-                enable = true,
-                set_jumps = true,
-                goto_previous_start = {
-                    ["[m"] = "@function.outer",
-                    ["[c"] = "@class.outer",
-                },
-                goto_next_start = {
-                    ["]m"] = "@function.outer",
-                    ["]c"] = "@class.outer",
-                },
-                goto_previous_end = {
-                    ["[M"] = "@function.outer",
-                    ["[C"] = "@class.outer",
-                },
-                goto_next_end = {
-                    ["]M"] = "@function.outer",
-                    ["]C"] = "@class.outer",
-                },
-            },
-        },
+    -- Enable highlighting and auto-install for supported filetypes
+    vim.api.nvim_create_autocmd('FileType', {
+        callback = function()
+            local ft = vim.bo.filetype
+            local available = require('nvim-treesitter').get_available()
+            if vim.tbl_contains(available, ft) then
+                require('nvim-treesitter').install({ ft })
+            end
+            pcall(vim.treesitter.start)
+        end,
     })
 
     require('treesitter-context').setup({
-        enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-        max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
-        min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
+        enable = true,
+        max_lines = 0,
+        min_window_height = 0,
         line_numbers = true,
-        multiline_threshold = 20, -- Maximum number of lines to show for a single context
-        trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
-        mode = 'cursor',  -- Line used to calculate context. Choices: 'cursor', 'topline'
-        -- Separator between context and content. Should be a single character string, like '-'.
-        -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
+        multiline_threshold = 20,
+        trim_scope = 'outer',
+        mode = 'cursor',
         separator = nil,
-        zindex = 20, -- The Z-index of the context window
-        on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
+        zindex = 20,
+        on_attach = nil,
     })
 
-    vim.keymap.set("n", "<leader>th", ":TSToggle highlight<CR>");
-    vim.keymap.set("n", "<leader>cc", ":TSContextToggle<CR>");
+    local move = require("nvim-treesitter-textobjects.move")
+    vim.keymap.set({ "n", "x", "o" }, "[m", function() move.goto_previous_start("@function.outer", "textobjects") end)
+    vim.keymap.set({ "n", "x", "o" }, "[c", function() move.goto_previous_start("@class.outer", "textobjects") end)
+    vim.keymap.set({ "n", "x", "o" }, "]m", function() move.goto_next_start("@function.outer", "textobjects") end)
+    vim.keymap.set({ "n", "x", "o" }, "]c", function() move.goto_next_start("@class.outer", "textobjects") end)
+    vim.keymap.set({ "n", "x", "o" }, "[M", function() move.goto_previous_end("@function.outer", "textobjects") end)
+    vim.keymap.set({ "n", "x", "o" }, "[C", function() move.goto_previous_end("@class.outer", "textobjects") end)
+    vim.keymap.set({ "n", "x", "o" }, "]M", function() move.goto_next_end("@function.outer", "textobjects") end)
+    vim.keymap.set({ "n", "x", "o" }, "]C", function() move.goto_next_end("@class.outer", "textobjects") end)
+
+    vim.keymap.set("n", "<leader>cc", ":TSContextToggle<CR>")
 end
 
 return {
     "nvim-treesitter/nvim-treesitter",
-    dependencies = { "nvim-treesitter/nvim-treesitter-context", "nvim-treesitter/nvim-treesitter-textobjects" },
+    branch = "main",
+    dependencies = {
+        "nvim-treesitter/nvim-treesitter-context",
+        { "nvim-treesitter/nvim-treesitter-textobjects", branch = "main" },
+    },
     build = ":TSUpdate",
     config = setup
 }
