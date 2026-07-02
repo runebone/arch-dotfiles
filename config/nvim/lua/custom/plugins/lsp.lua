@@ -15,13 +15,28 @@ local setup = function()
             ["<C-Space>"] = cmp.mapping.complete(),
         }),
         sources = cmp.config.sources({
-            { name = 'nvim_lsp' },
-            { name = 'nvim_lua' },
-            { name = 'luasnip' }, -- For luasnip users.
-            { name = 'path' },
+            { name = "nvim_lsp" },
+            { name = "nvim_lua" },
+            { name = "luasnip" },
+            { name = "path" },
         }, {
-            { name = 'buffer' },
+            { name = "buffer" },
         })
+    })
+
+    -- ========== vim-dadbod-completion (buffer-local for sql)
+    vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "sql", "mysql", "plsql" },
+        callback = function()
+            cmp.setup.buffer({
+                sources = cmp.config.sources({
+                    { name = "vim-dadbod-completion" },
+                    { name = "luasnip" },
+                }, {
+                    { name = "buffer" },
+                }),
+            })
+        end,
     })
 
     -- ========== LuaSnip
@@ -194,6 +209,7 @@ return {
         "saadparwaiz1/cmp_luasnip",
         "rafamadriz/friendly-snippets",
         "j-hui/fidget.nvim",
+        "kristijanhusak/vim-dadbod-completion",
     },
     config = setup
 }
