@@ -335,3 +335,15 @@ label:focus {
 #privacy-item.audio-out {
     background-color: #0069d4;
 }
+
+#custom-keylogger {
+    padding: 0 14px;
+    min-width: 0;
+    background-color: #2d3436;
+    color: #636e72;
+}
+
+#custom-keylogger.active {
+    background-color: #ed604f;
+    color: #ffffff;
+}
