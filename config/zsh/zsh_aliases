@@ -35,6 +35,7 @@ alias vb='virtualbox'
 alias xx='wl-copy'
 alias rs='rsync -avzhP --append-verify'
 alias gats='sh ~/.local/work-scripts/get-stage-access-token.sh'
+alias vnc='XDG_RUNTIME_DIR=/run/user/$(id -u) WAYLAND_DISPLAY=wayland-1 wayvnc 127.0.0.1 5901'
 
 alias  u='cd ~/University && l'
 alias  D='cd ~/Downloads && l'

@@ -15,6 +15,9 @@ export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
 export LUA_PATH="/usr/share/lua/5.4/?.lua;/usr/local/share/lua/5.4/?.lua;/usr/local/share/lua/5.4/?/init.lua;/usr/share/lua/5.4/?/init.lua;/usr/local/lib/lua/5.4/?.lua;/usr/local/lib/lua/5.4/?/init.lua;/usr/lib/lua/5.4/?.lua;/usr/lib/lua/5.4/?/init.lua;./?.lua;./?/init.lua;/home/defuser/.luarocks/share/lua/5.4/?.lua;/home/defuser/.luarocks/share/lua/5.4/?/init.lua"
 export LUA_CPATH="/usr/local/lib/lua/5.4/?.so;/usr/lib/lua/5.4/?.so;/usr/local/lib/lua/5.4/loadall.so;/usr/lib/lua/5.4/loadall.so;./?.so;/home/defuser/.luarocks/lib/lua/5.4/?.so"
 export CHROME_EXECUTABLE="/usr/bin/google-chrome-stable"
+export DBUI_DEV="postgres://user:pass@host:port/db"
+export DBUI_STAGE="postgres://user:pass@host:port/db"
+export DBUI_PROD="postgres://user:pass@host:port/db"
 
 # t y o p ] \ a s f k z n - available letters to bind Ctrl+
 # k - git worktree (gwtx)
