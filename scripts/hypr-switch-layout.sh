@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if (grep -rq "rpd" $HOME/.config/hypr/xkb.conf); then
-    ln -sf $HOME/.dotfiles/config/hypr/xkb-qwerty.conf $HOME/.config/hypr/xkb.conf
+if (grep -rq "rpd" $HOME/.config/hypr/xkb.lua); then
+    ln -sf $HOME/.dotfiles/config/hypr/xkb-qwerty.lua $HOME/.config/hypr/xkb.lua
 else
-    ln -sf $HOME/.dotfiles/config/hypr/xkb-rpd.conf $HOME/.config/hypr/xkb.conf
+    ln -sf $HOME/.dotfiles/config/hypr/xkb-rpd.lua $HOME/.config/hypr/xkb.lua
 fi

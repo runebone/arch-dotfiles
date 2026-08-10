@@ -1,0 +1,6 @@
+hl.config({
+    input = {
+        kb_layout = "rpd,ru",
+        kb_options = "grp:caps_toggle",
+    },
+})
