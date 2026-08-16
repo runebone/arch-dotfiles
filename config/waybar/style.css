@@ -315,6 +315,17 @@ label:focus {
 	background-color: transparent;
 }
 
+#custom-keylogger {
+    padding: 0 10px;
+    background-color: #2d3436;
+    color: #636e72;
+}
+
+#custom-keylogger.active {
+    background-color: #ed604f;
+    color: #000000;
+}
+
 #privacy {
     padding: 0;
 }

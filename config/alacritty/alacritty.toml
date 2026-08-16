@@ -23,8 +23,8 @@ background = "#060606"
 foreground = "#fce8c3"
 
 [font]
-size = 20.0
-# size = 14.0
+# size = 20.0
+size = 14.0
 
 [font.normal]
 family = "monospace"
@@ -292,7 +292,7 @@ mods = "Alt"
 history = 100000
 
 [window]
-opacity = 1.65
+opacity = 1.75
 
 [[keyboard.bindings]]
 key = "Return"
