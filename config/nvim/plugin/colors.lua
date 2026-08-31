@@ -35,4 +35,5 @@ end
 
 vim.keymap.set("n", "<leader>l", ":lua ToggleLight()<CR>");
 vim.keymap.set("n", "<leader>d", ":lua DisableBackground()<CR>");
-vim.keymap.set("n", "<leader>g", ":lua SetGruvbox()<CR>");
+-- <leader>g freed for git (diffview/gitsigns); SetGruvbox() still runs from init.lua
+-- vim.keymap.set("n", "<leader>g", ":lua SetGruvbox()<CR>");
