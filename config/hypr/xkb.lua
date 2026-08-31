@@ -1,1 +1,1 @@
-/home/defuser/.dotfiles/config/hypr/xkb-qwerty.lua
+/home/rukost/.dotfiles/config/hypr/xkb-qwerty.lua
