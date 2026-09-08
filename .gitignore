@@ -1,2 +1,3 @@
 config/hypr/xkb.conf
 config/hypr/xkb.lua
+config/zsh/.env
