@@ -198,6 +198,12 @@ hl.config({
         repeat_delay = 290,
     },
 
+    cursor = {
+        -- Mirrored HDMI-A-1 drew a second, frozen cursor in the center: its
+        -- hardware cursor plane never got position updates. Software only.
+        no_hardware_cursors = true,
+    },
+
     misc = {
         force_default_wallpaper = 0,   -- Set to 0 or 1 to disable the anime mascot wallpapers
         disable_hyprland_logo = true,  -- If true disables the random hyprland logo / anime girl background. :(

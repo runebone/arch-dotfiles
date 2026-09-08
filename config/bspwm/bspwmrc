@@ -2,10 +2,28 @@
 
 # pgrep -x sxhkd > /dev/null || sxhkd &
 
-bspc monitor -d 1 2 3 4 5 6 7 8
-
 bspc config border_width 0
 bspc config window_gap 0
 bspc config focus_follows_pointer true
+# Warp the pointer along when focus jumps to another monitor, otherwise
+# focus_follows_pointer drags focus straight back to the old screen.
+bspc config pointer_follows_monitor true
 
-sh $HOME/.dotfiles/scripts/lemonbar.sh
+# External screens first: desktop 1 (and the initial focus) should land on the
+# monitor I actually work on, not on the laptop panel.
+monitors="$(bspc query -M --names | grep -v '^eDP') $(bspc query -M --names | grep '^eDP')"
+count=$(echo $monitors | wc -w)
+
+start=1
+left=$count
+for monitor in $monitors; do
+    n=$(( (9 - start + left - 1) / left ))
+    bspc monitor "$monitor" -d $(seq $start $((start + n - 1)))
+    start=$((start + n))
+    left=$((left - 1))
+done
+
+# Focus desktop 1, i.e. the first monitor of the list above.
+bspc desktop -f 1
+
+# pgrep -f lemonbar.sh > /dev/null || sh $HOME/.dotfiles/scripts/lemonbar.sh
