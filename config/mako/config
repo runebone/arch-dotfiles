@@ -1,0 +1,33 @@
+# mako — terminal look, srcery palette (matches alacritty)
+font=monospace 11
+width=340
+height=110
+outer-margin=10
+margin=6
+padding=10,14
+border-size=2
+border-radius=0
+icons=0
+default-timeout=5000
+anchor=top-right
+layer=overlay
+format=<b>> %s</b>\n  %b
+
+# Base: alacritty bg/fg
+background-color=#060606f2
+text-color=#fce8c3
+border-color=#3a3a3a
+
+[urgency=low]
+text-color=#918175
+border-color=#2a2a2a
+default-timeout=3000
+
+[urgency=normal]
+border-color=#2c78bf
+
+[urgency=critical]
+background-color=#060606f2
+text-color=#f75341
+border-color=#ef2f27
+default-timeout=0
