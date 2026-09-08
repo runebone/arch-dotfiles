@@ -84,8 +84,7 @@ alias cft='$e ~/.config/tmux/tmux.conf'
 alias cft='$e ~/.config/tmux/tmux.conf'
 alias cfA='$e ~/.config/alacritty/alacritty.toml'
 alias cfts='$e ~/.dotfiles/scripts/bin/tmux-sessionizer'
-alias cfh='$e ~/.config/hypr/hyprland.conf'
-alias cfhp='$e ~/.config/hypr/hyprpaper.conf'
+alias cfh='$e ~/.config/hypr/hyprland.lua'
 alias cfw='$e ~/.config/waybar/config.jsonc'
 alias cfp='$e ~/.zprofile'
 alias cfk='$e ~/.config/keyd/default.conf'
@@ -94,11 +93,8 @@ alias va='source .venv/bin/activate'
 alias ob='obsidian'
 alias hl='hyprland'
 
-alias AmneziaVPN='QT_QPA_PLATFORM=xcb AmneziaVPN'
+# alias AmneziaVPN='QT_QPA_PLATFORM=xcb AmneziaVPN'
 
-alias sgp='ssh root@stage.pro-rabota.com -C "cd /home/sql-query-portal && git pull"'
-alias sbfree='sh ~/.local/work-scripts/free-sb-stage.sh'
-alias cid='sh ~/.local/work-scripts/get-cid.sh'
 alias first="awk '{print \$1}'"
 
 # git worktree: interactive project/mode/branch selection via fzf, creates worktree and cds into it
