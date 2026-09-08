@@ -1,0 +1,8 @@
+#!/bin/sh
+
+while read file
+do
+    case "$1" in
+	"i")	notify-send "File information" "$(mediainfo "$file")" ;;
+    esac
+done
