@@ -20,6 +20,7 @@ vim.g.clipboard = {
 opt.clipboard = "unnamedplus"
 
 opt.inccommand = "split"
+opt.undofile = true
 opt.smartcase = true
 opt.ignorecase = true
 

@@ -10,7 +10,8 @@ local setup = function()
             ["<leader>cd"] = function()
               local oil = require("oil")
               local dir = oil.get_current_dir()
-              vim.cmd("cd " .. dir)
+              if not dir then return end
+              vim.cmd.cd({ dir })
               print("cwd set to: " .. dir)
             end,
         },

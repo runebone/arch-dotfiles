@@ -1,4 +1,22 @@
 local setup = function()
+    -- These defaults duplicate our mappings and make the shorter gr wait.
+    for key, action in pairs({
+        gra = 'code_action', gri = 'implementation', grn = 'rename',
+        grr = 'references', grt = 'type_definition',
+    }) do
+        local mapping = vim.fn.maparg(key, 'n', false, true)
+        if mapping.callback == vim.lsp.buf[action]
+            or mapping.desc == 'vim.lsp.buf.' .. action .. '()' then
+            vim.keymap.del('n', key)
+        end
+    end
+    -- Preserve the remaining gr-prefixed default under the call/action group.
+    local code_lens = vim.fn.maparg('grx', 'n', false, true)
+    if code_lens.callback == vim.lsp.codelens.run or code_lens.desc == 'vim.lsp.codelens.run()' then
+        vim.keymap.del('n', 'grx')
+        vim.keymap.set('n', '<leader>cl', vim.lsp.codelens.run, { desc = 'Run code lens' })
+    end
+
     -- ========== Completion (with luasnip backend) setup
     local cmp = require('cmp')
     local cmp_select = { behavior = cmp.SelectBehavior.Select }

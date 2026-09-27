@@ -15,7 +15,6 @@ function M.run(opts)
     local actions = require('telescope.actions')
     local state = require('telescope.actions.state')
     local conf = require('telescope.config').values
-    local finders = require('telescope.finders')
     local make_entry = require('telescope.make_entry')
     local pickers = require('telescope.pickers')
 
@@ -39,12 +38,10 @@ function M.run(opts)
                     vim.notify('File filtering is still running; press Enter when it finishes', vim.log.levels.INFO)
                     return
                 end
-                local files, allowed, bytes = {}, {}, 0
+                local files = {}
                 for entry in picker.manager:iter() do
                     local path = entry.value
                     files[#files + 1] = path
-                    allowed[path] = true
-                    bytes = bytes + #path + 1
                 end
                 if #files == 0 then
                     vim.notify('No matching files', vim.log.levels.INFO)
@@ -56,33 +53,20 @@ function M.run(opts)
                 pickers.new(search_opts, {
                     prompt_title = ('Text in %d files [%s]'):format(#files, query),
                     debounce = 100,
-                    finder = finders.new_async_job({
+                    default_text = opts.text_query,
+                    finder = require('config.telescope.scoped_grep').new({
                         cwd = cwd,
-                        command_generator = function(prompt)
-                            if prompt == '' then return nil end
-                            local args = { 'rg', '--color=never', '--no-heading',
-                                '--with-filename', '--line-number', '--column',
-                                '--ignore-case', '-e', M.pattern(prompt), '--' }
-                            -- Bound argv size for very broad path queries. The
-                            -- entry filter below preserves the frozen file set.
-                            if bytes + #files * 8 < 64000 then
-                                vim.list_extend(args, files)
-                            else
-                                args[#args + 1] = '.'
-                            end
-                            return args
-                        end,
-                        entry_maker = function(line)
-                            local entry = entry_maker(line)
-                            if entry and allowed[entry.filename:gsub('^%./', '')] then return entry end
-                        end,
+                        files = files,
+                        pattern = M.pattern,
+                        entry_maker = entry_maker,
                     }),
                     sorter = require('telescope.sorters').empty(),
                     previewer = conf.grep_previewer(search_opts),
                     attach_mappings = function(bufnr, map)
                         local function back()
+                            local text_query = state.get_current_line()
                             actions.close(bufnr)
-                            M.run({ cwd = cwd, path_query = query })
+                            M.run({ cwd = cwd, path_query = query, text_query = text_query })
                         end
                         map('i', '<C-b>', back)
                         map('n', '<C-b>', back)
