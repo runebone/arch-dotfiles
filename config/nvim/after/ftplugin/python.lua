@@ -1,4 +1,4 @@
-vim.keymap.set("n", "<leader>x", ":!python %<CR>", { desc = "Execute current python file" })
+vim.keymap.set("n", "<leader>x", ":!python %<CR>", { buffer = true, desc = "Execute current python file" })
 
 vim.opt_local.expandtab = true
 vim.opt_local.autoindent = true

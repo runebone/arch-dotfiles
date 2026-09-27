@@ -85,12 +85,12 @@ local setup = function()
         vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
         vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts)
         vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
-        vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
+        vim.keymap.set('n', '<leader>ee', vim.diagnostic.open_float,
+            { buffer = bufnr, desc = 'Show diagnostics at cursor' })
         vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
         vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
         vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
 
-        vim.keymap.set('n', '<leader>f', vim.lsp.buf.code_action, opts)
         vim.keymap.set({ 'n', 'x' }, '<leader>ca', vim.lsp.buf.code_action,
             { buffer = bufnr, desc = 'Code actions and refactorings' })
     end

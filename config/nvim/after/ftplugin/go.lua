@@ -1,5 +1,5 @@
-vim.keymap.set("n", "<leader>rf", ":!go mod tidy<CR>:LspRestart<CR>", { desc = "Go mod tidy and restart LSP" })
-vim.keymap.set("n", "<leader>x", ":!go run %<CR>", { desc = "Execute current go file" })
+vim.keymap.set("n", "<leader>rf", ":!go mod tidy<CR>:LspRestart<CR>", { buffer = true, desc = "Go mod tidy and restart LSP" })
+vim.keymap.set("n", "<leader>x", ":!go run %<CR>", { buffer = true, desc = "Execute current go file" })
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "go",
