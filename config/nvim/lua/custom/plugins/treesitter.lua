@@ -32,6 +32,21 @@ local setup = function()
         on_attach = nil,
     })
 
+    require('nvim-treesitter-textobjects').setup({
+        select = { lookahead = true },
+    })
+    local select = require('nvim-treesitter-textobjects.select')
+    for key, capture in pairs({
+        ['if'] = '@function.inner',
+        ['af'] = '@function.outer',
+        ['ia'] = '@parameter.inner',
+        ['aa'] = '@parameter.outer',
+    }) do
+        vim.keymap.set({ 'x', 'o' }, key, function()
+            select.select_textobject(capture, 'textobjects')
+        end, { desc = 'Select ' .. capture })
+    end
+
     local move = require("nvim-treesitter-textobjects.move")
     vim.keymap.set({ "n", "x", "o" }, "[m", function() move.goto_previous_start("@function.outer", "textobjects") end)
     vim.keymap.set({ "n", "x", "o" }, "[c", function() move.goto_previous_start("@class.outer", "textobjects") end)

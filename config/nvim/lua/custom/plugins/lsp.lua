@@ -91,6 +91,8 @@ local setup = function()
         vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
 
         vim.keymap.set('n', '<leader>f', vim.lsp.buf.code_action, opts)
+        vim.keymap.set({ 'n', 'x' }, '<leader>ca', vim.lsp.buf.code_action,
+            { buffer = bufnr, desc = 'Code actions and refactorings' })
     end
 
     local config = {
@@ -111,6 +113,8 @@ local setup = function()
     vim.lsp.config.gopls = {
         settings = {
             gopls = {
+                usePlaceholders = true,
+                completeUnimported = true,
                 buildFlags = {"-tags=unit,integration,e2e"},
                 analyses = {
                     unusedparams = true,
@@ -126,6 +130,12 @@ local setup = function()
         },
         on_attach = function(_, bufnr)
             lsp_attach(_, bufnr)
+            vim.keymap.set('n', '<leader>oi', function()
+                vim.lsp.buf.code_action({
+                    context = { only = { 'source.organizeImports' }, diagnostics = {} },
+                    apply = true,
+                })
+            end, { buffer = bufnr, desc = 'Go: organize imports' })
 
             -- Автоформатирование при сохранении
             vim.api.nvim_create_autocmd("BufWritePre", {

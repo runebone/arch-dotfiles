@@ -22,6 +22,10 @@ local setup = function()
         { desc = 'Fuzzy search in current file' })
     vim.keymap.set('n', '<leader>sr', builtin.resume,
         { desc = 'Resume last Telescope search' })
+    vim.keymap.set('n', '<leader>ss', builtin.lsp_document_symbols,
+        { desc = 'Search symbols in current file' })
+    vim.keymap.set('n', '<leader>sw', builtin.lsp_dynamic_workspace_symbols,
+        { desc = 'Search workspace symbols' })
     local recent_buffers = function()
         builtin.buffers({ sort_mru = true, ignore_current_buffer = true })
     end
