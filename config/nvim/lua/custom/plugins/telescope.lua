@@ -18,6 +18,16 @@ local setup = function()
 
     local builtin = require("telescope.builtin")
 
+    vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find,
+        { desc = 'Fuzzy search in current file' })
+    vim.keymap.set('n', '<leader>sr', builtin.resume,
+        { desc = 'Resume last Telescope search' })
+    local recent_buffers = function()
+        builtin.buffers({ sort_mru = true, ignore_current_buffer = true })
+    end
+    vim.keymap.set('n', '<leader>b', recent_buffers,
+        { desc = 'Switch buffers, most recent first' })
+
     vim.keymap.set("n", "<leader>ep", function()
         builtin.find_files {
             cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy")
@@ -38,7 +48,8 @@ local setup = function()
     vim.keymap.set('n', '<leader>vc', builtin.colorscheme, {})
     vim.keymap.set('n', '<leader>vs', builtin.spell_suggest, {})
     vim.keymap.set('n', '<leader>vm', builtin.marks, {})
-    vim.keymap.set('n', '<leader>vb', builtin.buffers, {})
+    vim.keymap.set('n', '<leader>vb', recent_buffers,
+        { desc = 'Switch buffers, most recent first' })
     vim.keymap.set('n', '<leader>vr', builtin.registers, {})
     vim.keymap.set('n', '<leader>vp', builtin.man_pages, {})
     vim.keymap.set('n', '<leader>rg', builtin.live_grep, {})
