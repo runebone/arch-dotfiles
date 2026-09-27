@@ -22,13 +22,7 @@ function M.tidy()
 end
 
 function M.run()
-    local file = vim.api.nvim_buf_get_name(0)
-    if file == '' then return end
-    vim.cmd.update()
-    local root = M.root()
-    vim.cmd('botright 12new')
-    vim.fn.jobstart({ 'go', 'run', file }, { cwd = root, term = true })
-    vim.cmd.startinsert()
+    require('config.go_tasks').run_package()
 end
 
 function M.lint()

@@ -22,7 +22,7 @@ function M.run()
         require('telescope.builtin').live_grep({
             cwd = directory,
             search_dirs = { '.' },
-            prompt_title = 'Search ' .. input .. ' (includes ignored files)',
+            prompt_title = require('config.telescope.project').title('Search (includes ignored files)', directory),
             additional_args = { '--no-ignore' },
         })
     end)

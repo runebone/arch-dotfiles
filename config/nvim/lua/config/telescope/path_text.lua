@@ -1,3 +1,4 @@
+local project = require('config.telescope.project')
 local M = {}
 
 -- Escape literal characters before building a case-insensitive subsequence regex.
@@ -11,7 +12,7 @@ end
 
 function M.run(opts)
     opts = opts or {}
-    local cwd = opts.cwd or vim.fn.getcwd()
+    local cwd = opts.cwd or project.root()
     local actions = require('telescope.actions')
     local state = require('telescope.actions.state')
     local conf = require('telescope.config').values
@@ -28,7 +29,7 @@ function M.run(opts)
         cwd = cwd,
         default_text = opts.path_query,
         find_command = { 'rg', '--files', '--color=never' },
-        prompt_title = 'File paths → Enter locks all matches',
+        prompt_title = project.title('File paths → Enter locks all matches', cwd),
         on_complete = { function(picker) completed_query = picker:_get_prompt() end },
         attach_mappings = function(prompt_bufnr)
             actions.select_default:replace(function()
@@ -51,7 +52,7 @@ function M.run(opts)
                 local search_opts = { cwd = cwd }
                 local entry_maker = make_entry.gen_from_vimgrep(search_opts)
                 pickers.new(search_opts, {
-                    prompt_title = ('Text in %d files [%s]'):format(#files, query),
+                    prompt_title = project.title(('Text in %d files [%s]'):format(#files, query), cwd),
                     debounce = 100,
                     default_text = opts.text_query,
                     finder = require('config.telescope.scoped_grep').new({

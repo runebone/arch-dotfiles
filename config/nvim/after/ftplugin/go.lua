@@ -1,6 +1,6 @@
 local go = require('config.go')
 vim.keymap.set('n', '<leader>rf', go.tidy, { buffer = true, desc = 'Go mod tidy in nearest module' })
-vim.keymap.set('n', '<leader>x', go.run, { buffer = true, desc = 'Run current Go file in nearest module' })
+vim.keymap.set('n', '<leader>x', go.run, { buffer = true, desc = 'Run current Go package' })
 vim.keymap.set('n', '<leader>rl', go.lint, { buffer = true, desc = 'Lint current Go package' })
 
 vim.opt_local.expandtab = false

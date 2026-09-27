@@ -1,8 +1,9 @@
+local project = require('config.telescope.project')
 local M = {}
 
 function M.run(opts)
     opts = opts or {}
-    local cwd = opts.cwd or vim.fn.getcwd()
+    local cwd = opts.cwd or project.root()
     local text = opts.text or vim.fn.expand('<cword>')
     if vim.fn.executable('rg') == 0 then
         vim.notify('Word search requires ripgrep (rg)', vim.log.levels.ERROR)
@@ -27,7 +28,7 @@ function M.run(opts)
     local search_opts = { cwd = cwd }
     local make_entry = require('telescope.make_entry').gen_from_vimgrep(search_opts)
     require('telescope.pickers').new(search_opts, {
-        prompt_title = ('Files containing %q · Ctrl-E edits text'):format(text),
+        prompt_title = project.title(('Files containing %q · Ctrl-E edits text'):format(text), cwd),
         results_title = 'One result per file · first matching line',
         default_text = opts.path_query,
         finder = require('telescope.finders').new_oneshot_job({

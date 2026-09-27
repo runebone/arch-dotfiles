@@ -1,3 +1,4 @@
+local project = require('config.telescope.project')
 local pickers = require "telescope.pickers"
 local finders = require "telescope.finders"
 local make_entry = require "telescope.make_entry"
@@ -7,7 +8,7 @@ local M = {}
 
 local live_multigrep = function(opts)
     opts = opts or {}
-    opts.cwd = opts.cwd or vim.fn.getcwd()
+    opts.cwd = opts.cwd or project.root()
 
     local finder = finders.new_async_job {
         command_generator = function(prompt)
@@ -47,7 +48,7 @@ local live_multigrep = function(opts)
 
     pickers.new(opts, {
         debounce = 100,
-        prompt_title = "Multi Grep",
+        prompt_title = project.title("Multi Grep", opts.cwd),
         finder = finder,
         previewer = conf.grep_previewer(opts),
         sorter = require("telescope.sorters").empty(),

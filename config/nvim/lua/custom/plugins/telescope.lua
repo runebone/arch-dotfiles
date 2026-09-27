@@ -17,6 +17,15 @@ local setup = function()
     require("telescope").load_extension("fzf")
 
     local builtin = require("telescope.builtin")
+    local project = require('config.telescope.project')
+    local function project_files()
+        builtin.find_files(project.options('Project files', {
+            find_command = { 'rg', '--files', '--color=never' },
+        }))
+    end
+    local function project_grep(opts)
+        builtin.live_grep(project.options('Project text', opts))
+    end
 
     vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find,
         { desc = 'Fuzzy search in current file' })
@@ -39,10 +48,9 @@ local setup = function()
     end)
 
     -- Not "ff" just to type it faster with alternate fingers
-    vim.keymap.set("n", "<leader>pf", builtin.find_files, {})
-    vim.keymap.set("n", "<C-p>", function()
-        builtin.find_files({ find_command = { "rg", "--files", "--color=never" } })
-    end, { desc = "Find project files, respecting ignore rules" })
+    vim.keymap.set("n", "<leader>pf", project_files, { desc = "Find project files" })
+    vim.keymap.set("n", "<C-p>", project_files,
+        { desc = "Find project files, respecting ignore rules" })
     vim.keymap.set('n', '<leader>sf', function()
         require('config.telescope.path_text').run()
     end, { desc = 'Search fuzzy text in matching file paths' })
@@ -50,7 +58,7 @@ local setup = function()
         require('config.telescope.directory_search').run()
     end, { desc = 'Search a directory, including ignored files' })
     vim.keymap.set('n', '<leader>ps', function()
-        builtin.grep_string({ search = vim.fn.input("Grep > ") })
+        builtin.grep_string(project.options("Project text", { search = vim.fn.input("Grep > ") }))
     end)
     vim.keymap.set('n', '<leader>vh', builtin.help_tags, {})
     vim.keymap.set('n', '<leader>vk', builtin.keymaps, {})
@@ -61,7 +69,7 @@ local setup = function()
         { desc = 'Switch buffers, most recent first' })
     vim.keymap.set('n', '<leader>vr', builtin.registers, {})
     vim.keymap.set('n', '<leader>vp', builtin.man_pages, {})
-    vim.keymap.set('n', '<leader>rg', builtin.live_grep, {})
+    vim.keymap.set('n', '<leader>rg', project_grep, { desc = 'Search project text' })
 
     local multigrep = require("config.telescope.multigrep")
     vim.keymap.set("n", "<leader>fg", multigrep.run, {})
@@ -86,9 +94,9 @@ local setup = function()
         vim.schedule(function()
             local text = get_last_visual_selection()
             if text == '' then
-                builtin.live_grep()
+                project_grep()
             else
-                builtin.live_grep({ default_text = text })
+                project_grep({ default_text = text })
             end
         end)
     end, { desc = 'Telescope live_grep with visual selection', silent = true })
