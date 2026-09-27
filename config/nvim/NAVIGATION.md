@@ -11,7 +11,6 @@ Leader is **Space**. Restart Neovim after changing configuration.
 | `Space ps` | Prompt for text, then show project matches |
 | `Space j` | Files containing the cursor word; type to filter paths, `Ctrl E` edits the text |
 | `Space sf` | Fuzzy path → Enter locks matching files → fuzzy text; `Ctrl B` revises the path and preserves text |
-| `Space fg` | Regex text plus two spaces plus a file glob, e.g. `Create  *.go` |
 | `Space sm` | Choose an explicit directory and search it, including ignored files |
 | `Space /` | Fuzzy search inside the current buffer |
 | `Space sr` | Resume the previous Telescope picker |

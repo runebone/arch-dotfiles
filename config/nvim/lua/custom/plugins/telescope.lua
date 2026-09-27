@@ -71,9 +71,6 @@ local setup = function()
     vim.keymap.set('n', '<leader>vp', builtin.man_pages, {})
     vim.keymap.set('n', '<leader>rg', project_grep, { desc = 'Search project text' })
 
-    local multigrep = require("config.telescope.multigrep")
-    vim.keymap.set("n", "<leader>fg", multigrep.run, {})
-
     -- Visual mode: live_grep with selected text as default
     local function get_last_visual_selection()
         local _, ls, cs = unpack(vim.fn.getpos("'<"))
