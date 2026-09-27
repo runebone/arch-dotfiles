@@ -74,36 +74,8 @@ local setup = function()
     end, { desc = 'Telescope live_grep with visual selection', silent = true })
 
     vim.keymap.set('n', '<leader>j', function()
-      local pickers = require('telescope.pickers')
-      local finders = require('telescope.finders')
-      local conf = require('telescope.config').values
-      local make_entry = require('telescope.make_entry')
-
-      local word = vim.fn.expand('<cword>')
-
-      local function make_finder()
-        local args = vim.deepcopy(conf.vimgrep_arguments)
-        table.insert(args, '--fixed-strings')
-        table.insert(args, word)
-        local default_em = make_entry.gen_from_vimgrep({})
-        return finders.new_oneshot_job(args, {
-          entry_maker = function(line)
-            local entry = default_em(line)
-            if not entry then return nil end
-            local rel = vim.fn.fnamemodify(entry.filename, ':.')
-            entry.ordinal = rel
-            return entry
-          end,
-        })
-      end
-
-      pickers.new({}, {
-        prompt_title = "Live Grep: '" .. word .. "' | Find Files",
-        finder = make_finder(),
-        sorter = conf.generic_sorter({}),
-        previewer = conf.grep_previewer({}),
-      }):find()
-    end, { desc = 'Live grep by word under cursor with filter by full path' })
+        require('config.telescope.word_files').run()
+    end, { desc = 'Find files containing cursor word; Ctrl-E edits text' })
 end
 
 return {
