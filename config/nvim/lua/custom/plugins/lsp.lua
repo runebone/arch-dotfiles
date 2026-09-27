@@ -16,7 +16,6 @@ local setup = function()
         }),
         sources = cmp.config.sources({
             { name = "nvim_lsp" },
-            { name = "nvim_lua" },
             { name = "luasnip" },
             { name = "path" },
         }, {
@@ -26,6 +25,7 @@ local setup = function()
 
     -- ========== vim-dadbod-completion (buffer-local for sql)
     vim.api.nvim_create_autocmd("FileType", {
+        group = vim.api.nvim_create_augroup("SqlCompletion", { clear = true }),
         pattern = { "sql", "mysql", "plsql" },
         callback = function()
             cmp.setup.buffer({
@@ -68,10 +68,13 @@ local setup = function()
     })
 
     local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
-    local lsp_attach = function(_, bufnr)
+    local lsp_attach = function(client, bufnr)
         local opts = { buffer = bufnr }
 
-        vim.keymap.set('n', '<F4>', vim.cmd.ClangdSwitchSourceHeader)
+        if client.name == 'clangd' then
+            vim.keymap.set('n', '<F4>', '<Cmd>LspClangdSwitchSourceHeader<CR>',
+                { buffer = bufnr, desc = 'Switch C/C++ source and header' })
+        end
         vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
         vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
         vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
@@ -85,6 +88,9 @@ local setup = function()
         vim.keymap.set('n', '<leader>co', function()
             require('telescope.builtin').lsp_outgoing_calls()
         end, { buffer = bufnr, desc = 'Outgoing calls: functions called here' })
+        vim.keymap.set('n', '<leader>cu', function()
+            require('config.lsp.interface_usages').run()
+        end, { buffer = bufnr, desc = 'Go: usages of all interface methods' })
         vim.keymap.set('n', 'gr', function()
             require('telescope.builtin').lsp_references({ jump_type = 'never' })
         end, { buffer = bufnr, desc = 'Find references with Telescope' })
@@ -103,16 +109,15 @@ local setup = function()
             { buffer = bufnr, desc = 'Code actions and refactorings' })
     end
 
-    local config = {
-        on_attach = lsp_attach,
-        capabilities = lsp_capabilities
-    }
-
-    -- Новый API vim.lsp.config
-    vim.lsp.config('*', {
-        capabilities = lsp_capabilities,
-        on_attach = lsp_attach,
+    vim.api.nvim_create_autocmd('LspAttach', {
+        group = vim.api.nvim_create_augroup('CustomLspMappings', { clear = true }),
+        callback = function(event)
+            local client = vim.lsp.get_client_by_id(event.data.client_id)
+            if client then lsp_attach(client, event.buf) end
+        end,
     })
+    vim.lsp.config('*', { capabilities = lsp_capabilities })
+    local format_group = vim.api.nvim_create_augroup('GoFormatOnSave', { clear = true })
 
     -- Настройка clangd
     vim.lsp.config.clangd = {}
@@ -136,8 +141,7 @@ local setup = function()
                 gofumpt = true,
             }
         },
-        on_attach = function(_, bufnr)
-            lsp_attach(_, bufnr)
+        on_attach = function(client, bufnr)
             vim.keymap.set('n', '<leader>oi', function()
                 vim.lsp.buf.code_action({
                     context = { only = { 'source.organizeImports' }, diagnostics = {} },
@@ -145,11 +149,12 @@ local setup = function()
                 })
             end, { buffer = bufnr, desc = 'Go: organize imports' })
 
-            -- Автоформатирование при сохранении
+            vim.api.nvim_clear_autocmds({ group = format_group, buffer = bufnr })
             vim.api.nvim_create_autocmd("BufWritePre", {
+              group = format_group,
               buffer = bufnr,
               callback = function()
-                vim.lsp.buf.format({ async = false })
+                vim.lsp.buf.format({ bufnr = bufnr, id = client.id, async = false })
               end,
             })
         end,
@@ -175,44 +180,7 @@ local setup = function()
     -- Автозапуск LSP серверов
     vim.lsp.enable({'clangd', 'gopls', 'ruff', 'pyright', 'lua_ls', 'bashls', 'texlab'})
 
-    -- -- local lspconfig = require('lspconfig')
-    -- local lspconfig = vim.lsp.config
-    --
-    -- lspconfig.clangd.setup(config)
-    -- -- lspconfig.gopls.setup(config)
-    -- lspconfig.gopls.setup({
-    --     on_attach = lsp_attach,
-    --     capabilities = lsp_capabilities,
-    --     settings = {
-    --         gopls = {
-    --             buildFlags = {"-tags=unit,integration,e2e"},
-    --             analyses = {
-    --                 unusedparams = true,
-    --             },
-    --             staticcheck = true,
-    --             codelenses = {
-    --                 generate = true,
-    --                 gc_details = true,
-    --             },
-    --             gofumpt = true,
-    --         }
-    --     }
-    -- })
-    -- lspconfig.ruff.setup(config)
-    -- lspconfig.pyright.setup(config)
-    -- lspconfig.lua_ls.setup({
-    --     on_attach = config.on_attach,
-    --     capabilities = config.capabilities,
-    --     settings = {
-    --         Lua = {
-    --             diagnostics = {
-    --                 globals = { "vim" }
-    --             }
-    --         }
-    --     }
-    -- })
-    -- lspconfig.bashls.setup(config)
-    -- lspconfig.texlab.setup(config)
+
 end
 
 return {
@@ -223,7 +191,6 @@ return {
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
-        "hrsh7th/cmp-cmdline",
         "hrsh7th/nvim-cmp",
         "L3MON4D3/LuaSnip",
         "saadparwaiz1/cmp_luasnip",

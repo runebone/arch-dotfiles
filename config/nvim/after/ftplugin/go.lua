@@ -1,11 +1,8 @@
-vim.keymap.set("n", "<leader>rf", ":!go mod tidy<CR>:LspRestart<CR>", { buffer = true, desc = "Go mod tidy and restart LSP" })
-vim.keymap.set("n", "<leader>x", ":!go run %<CR>", { buffer = true, desc = "Execute current go file" })
+local go = require('config.go')
+vim.keymap.set('n', '<leader>rf', go.tidy, { buffer = true, desc = 'Go mod tidy in nearest module' })
+vim.keymap.set('n', '<leader>x', go.run, { buffer = true, desc = 'Run current Go file in nearest module' })
+vim.keymap.set('n', '<leader>rl', go.lint, { buffer = true, desc = 'Lint current Go package' })
 
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "go",
-  callback = function()
-    vim.opt_local.expandtab = false    -- использовать табы вместо пробелов
-    vim.opt_local.shiftwidth = 4      -- ширина отступа
-    vim.opt_local.tabstop = 4         -- ширина таба
-  end,
-})
+vim.opt_local.expandtab = false
+vim.opt_local.shiftwidth = 4
+vim.opt_local.tabstop = 4

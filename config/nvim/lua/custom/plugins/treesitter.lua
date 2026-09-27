@@ -1,20 +1,34 @@
 local setup = function()
     require('nvim-treesitter').setup()
 
-    -- Install parsers on startup
-    require('nvim-treesitter').install({ "c", "lua", "markdown", "go", "gomod", "gowork", "json" })
-
-    -- Enable highlighting and auto-install for supported filetypes
+    local ts = require('nvim-treesitter')
+    local pending = {}
     vim.api.nvim_create_autocmd('FileType', {
-        callback = function()
-            local ft = vim.bo.filetype
-            local available = require('nvim-treesitter').get_available()
-            if vim.tbl_contains(available, ft) then
-                require('nvim-treesitter').install({ ft })
+        group = vim.api.nvim_create_augroup('CustomTreesitter', { clear = true }),
+        callback = function(event)
+            local lang = vim.treesitter.language.get_lang(event.match)
+            if not lang then return end
+            local function start(buffer)
+                if vim.api.nvim_buf_is_valid(buffer)
+                    and vim.treesitter.language.get_lang(vim.bo[buffer].filetype) == lang then
+                    pcall(vim.treesitter.start, buffer, lang)
+                end
             end
-            local installed = require('nvim-treesitter').get_installed()
-            if vim.tbl_contains(installed, ft) then
-                pcall(vim.treesitter.start)
+            if vim.tbl_contains(ts.get_installed(), lang) then
+                start(event.buf)
+            elseif vim.tbl_contains(ts.get_available(), lang) then
+                if pending[lang] then
+                    pending[lang][event.buf] = true
+                    return
+                end
+                pending[lang] = { [event.buf] = true }
+                ts.install({ lang }):await(function()
+                    vim.schedule(function()
+                        local buffers = pending[lang] or {}
+                        pending[lang] = nil
+                        for buffer in pairs(buffers) do start(buffer) end
+                    end)
+                end)
             end
         end,
     })

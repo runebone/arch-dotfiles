@@ -7,7 +7,7 @@ local M = {}
 
 local live_multigrep = function(opts)
     opts = opts or {}
-    opts.cmd = opts.cwd vim.uv.cwd()
+    opts.cwd = opts.cwd or vim.fn.getcwd()
 
     local finder = finders.new_async_job {
         command_generator = function(prompt)
@@ -35,7 +35,9 @@ local live_multigrep = function(opts)
                     "--with-filename",
                     "--line-number",
                     "--column",
-                    "--smart-case"
+                    "--smart-case",
+                    "--",
+                    "."
                 }
             }):flatten():totable()
         end,
@@ -52,12 +54,6 @@ local live_multigrep = function(opts)
     }):find()
 end
 
-M.setup = function()
-    -- vim.keymap.set("n", "<leader>fg", live_multigrep)
-end
-
 M.run = live_multigrep
-
--- live_multigrep()
 
 return M
