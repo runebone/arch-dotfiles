@@ -2,7 +2,8 @@ local project = require('config.telescope.project')
 local M = {}
 
 -- Escape literal characters before building a case-insensitive subsequence regex.
-function M.pattern(text)
+function M.pattern(text, literal)
+    if literal then return vim.fn.escape(text, [[\.^$|?*+()[]{}]]) end
     local chars = vim.fn.split(text, '\\zs')
     for i, char in ipairs(chars) do
         chars[i] = vim.fn.escape(char, [[\.^$|?*+()[]{}]])
@@ -51,26 +52,47 @@ function M.run(opts)
                 actions.close(prompt_bufnr)
                 local search_opts = { cwd = cwd }
                 local entry_maker = make_entry.gen_from_vimgrep(search_opts)
-                pickers.new(search_opts, {
-                    prompt_title = project.title(('Text in %d files [%s]'):format(#files, query), cwd),
-                    debounce = 100,
-                    default_text = opts.text_query,
-                    finder = require('config.telescope.scoped_grep').new({
+                local literal = opts.literal or false
+                local function title()
+                    return project.title(('%s text in %d files [%s] · Ctrl-F toggles'):format(
+                        literal and 'Literal' or 'Fuzzy', #files, query), cwd)
+                end
+                local function finder()
+                    -- Capture the mode so a cancelled search cannot change modes mid-run.
+                    local mode = literal
+                    return require('config.telescope.scoped_grep').new({
                         cwd = cwd,
                         files = files,
-                        pattern = M.pattern,
+                        pattern = function(text) return M.pattern(text, mode) end,
                         entry_maker = entry_maker,
-                    }),
+                    })
+                end
+                pickers.new(search_opts, {
+                    prompt_title = title(),
+                    debounce = 100,
+                    default_text = opts.text_query,
+                    finder = finder(),
                     sorter = require('telescope.sorters').empty(),
                     previewer = conf.grep_previewer(search_opts),
                     attach_mappings = function(bufnr, map)
                         local function back()
                             local text_query = state.get_current_line()
                             actions.close(bufnr)
-                            M.run({ cwd = cwd, path_query = query, text_query = text_query })
+                            M.run({ cwd = cwd, path_query = query, text_query = text_query, literal = literal })
+                        end
+                        local function toggle()
+                            literal = not literal
+                            local current = state.get_current_picker(bufnr)
+                            current.prompt_title = title()
+                            if current.layout.prompt.border then
+                                current.layout.prompt.border:change_title(current.prompt_title)
+                            end
+                            current:refresh(finder(), { reset_prompt = false })
                         end
                         map('i', '<C-b>', back)
                         map('n', '<C-b>', back)
+                        map('i', '<C-f>', toggle)
+                        map('n', '<C-f>', toggle)
                         return true
                     end,
                 }):find()

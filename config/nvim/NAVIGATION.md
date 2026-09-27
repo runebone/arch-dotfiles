@@ -10,13 +10,15 @@ Leader is **Space**. Restart Neovim after changing configuration.
 | `Space rg` | Search project text; visual mode starts from the selection |
 | `Space ps` | Prompt for text, then show project matches |
 | `Space j` | Files containing the cursor word; type to filter paths, `Ctrl E` edits the text |
-| `Space sf` | Fuzzy path → Enter locks matching files → fuzzy text; `Ctrl B` revises the path and preserves text |
+| `Space sf` | Fuzzy path → Enter locks matching files → fuzzy text; `Ctrl B` revises the path and preserves text; `Ctrl F` toggles literal/fuzzy text |
 | `Space sm` | Choose an explicit directory and search it, including ignored files |
 | `Space /` | Fuzzy search inside the current buffer |
 | `Space sr` | Resume the previous Telescope picker |
 | `Space b` | Switch buffers, most recently used first |
 
 Project searches use the current file's nearest Git root, or the directory shown in Oil. For other buffers they use the working directory's Git root. Without Git they use the working directory. Linked worktrees and submodules are supported. Picker titles show the scope. An explicitly supplied `cwd` is preserved.
+
+In `Space sf`, both literal and fuzzy text modes are case-insensitive. The title shows the mode; it is preserved while revising the path filter. New searches start in fuzzy mode.
 
 Ripgrep searches respect `.gitignore`, `.ignore`, and `.rgignore`. Put `/docs/` or `/migrations/` in a project-root `.ignore` to hide those directories. `Space sm` overrides ignore rules only within the chosen directory; its relative paths and directory completion use the working directory. It remembers the last directory for that cwd during the session. Hidden files are still excluded.
 
@@ -54,6 +56,7 @@ Undo history persists across restarts.
 | Shortcut | Action |
 | --- | --- |
 | `Space x` in Go | Run the current **package**; it must be a `main` package |
+| `Space ta` in Go | Switch `foo.go` ↔ `foo_test.go`; missing counterparts are not created |
 | `Space tn` | Run the enclosing `Test…` function, including its subtests |
 | `Space tp` | Run tests for the current package |
 | `Space tr` | Rerun the last Go task, also available in terminal Normal mode |

@@ -1,5 +1,17 @@
 local M = {}
 
+function M.alternate()
+    local file = vim.api.nvim_buf_get_name(0)
+    if not file:match('%.go$') then return end
+    local target = file:match('_test%.go$') and file:gsub('_test%.go$', '.go')
+        or file:gsub('%.go$', '_test.go')
+    if vim.fn.filereadable(target) == 0 and vim.fn.bufnr(target) == -1 then
+        vim.notify('No matching file: ' .. target, vim.log.levels.INFO)
+        return
+    end
+    vim.cmd.edit({ target })
+end
+
 function M.root(bufnr)
     bufnr = bufnr or 0
     local name = vim.api.nvim_buf_get_name(bufnr)
