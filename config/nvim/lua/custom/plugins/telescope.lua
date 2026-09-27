@@ -36,7 +36,9 @@ local setup = function()
 
     -- Not "ff" just to type it faster with alternate fingers
     vim.keymap.set("n", "<leader>pf", builtin.find_files, {})
-    vim.keymap.set("n", "<C-p>", builtin.git_files, {})
+    vim.keymap.set("n", "<C-p>", function()
+        builtin.find_files({ find_command = { "rg", "--files", "--color=never" } })
+    end, { desc = "Find project files, respecting ignore rules" })
     vim.keymap.set('n', '<leader>sf', function()
         require('config.telescope.path_text').run()
     end, { desc = 'Search fuzzy text in matching file paths' })
