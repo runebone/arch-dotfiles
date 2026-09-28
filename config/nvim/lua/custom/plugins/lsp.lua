@@ -121,7 +121,7 @@ local setup = function()
             { buffer = bufnr, desc = 'Show diagnostics at cursor' })
         vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
         vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-        vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
+        vim.keymap.set('n', '<leader>ql', vim.diagnostic.setloclist, opts)
 
         vim.keymap.set({ 'n', 'x' }, '<leader>ca', vim.lsp.buf.code_action,
             { buffer = bufnr, desc = 'Code actions and refactorings' })

@@ -37,6 +37,38 @@ Ripgrep searches respect `.gitignore`, `.ignore`, and `.rgignore`. Put `/docs/` 
 
 `Space cu` uses gopls and the Go Treesitter parser. Its results are semantic method references, not instance-specific data flow. It supports ordinary embedded and aliased interfaces; generic type-set constraints are not supported. Results follow gopls's active build configuration. Type paths or text to filter the combined results.
 
+## Refactor task list
+
+Collect locations while reading code, then browse and complete them. Tasks are saved
+automatically per Git root (working directory outside Git) in Neovim's local state
+directory, under `refactor/`; no task files are added to your repository.
+
+| Shortcut | Action |
+| --- | --- |
+| `Space qa`, `Ctrl Q` (Normal mode) | Add the current line; adding it again reopens the existing task |
+| `Space qn` | Add the current line with a note, or update its existing note |
+| `Space qq` | Telescope pending tasks, with source previews |
+| `Space qf` | Export pending tasks to quickfix and open it |
+| `Space qd` | Complete the task at the cursor, in source or the exported quickfix list |
+| `]q` / `[q` | Next / previous entry in the active quickfix list |
+| `Space ql` | Diagnostics to location list (previously `Space q`) |
+
+In the task picker, `Enter` jumps to the source, `Ctrl D` toggles completion,
+`Ctrl X` deletes the selected task, and `Ctrl A` switches between pending and all
+tasks. These actions work in Insert and Normal modes. Show all tasks to reopen
+completed work. Multiple lines in the same file are independent tasks.
+
+Completion/deletion also updates the exported task quickfix list. Running tests
+or other searches can change the active quickfix list without losing your tasks;
+use `Space qf` to export them again. Harpoon remains available for pinned files.
+
+Locations follow edits while their buffers are loaded. After reopening a file,
+an exact, unique source-line match can relocate a task; otherwise its saved line
+number is used (clamped to the file length). File renames are not tracked.
+Concurrent Neovim sessions for the same project use the last saved task snapshot.
+`Ctrl V` still enters Visual Block mode. If your terminal intercepts `Ctrl Q`,
+use `Space qa`, or disable terminal flow control with `stty -ixon` in that shell.
+
 ## Edit
 
 | Shortcut | Action |
