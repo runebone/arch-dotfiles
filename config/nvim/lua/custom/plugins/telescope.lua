@@ -24,7 +24,30 @@ local setup = function()
         }))
     end
     local function project_grep(opts)
-        builtin.live_grep(project.options('Project text', opts))
+        opts = project.options('Project text', opts)
+        local fuzzy = false
+        local function title()
+            return project.title('Project text [' .. (fuzzy and 'Fuzzy' or 'Regex') .. '] · Ctrl-F toggles', opts.cwd)
+        end
+        opts.prompt_title = title()
+        opts.on_input_filter_cb = function(prompt)
+            return { prompt = fuzzy and require('config.telescope.path_text').pattern(prompt, false) or prompt }
+        end
+        opts.attach_mappings = function(bufnr, map)
+            local function toggle()
+                fuzzy = not fuzzy
+                local picker = require('telescope.actions.state').get_current_picker(bufnr)
+                picker.prompt_title = title()
+                if picker.layout.prompt.border then
+                    picker.layout.prompt.border:change_title(picker.prompt_title)
+                end
+                picker:refresh(nil, { reset_prompt = false })
+            end
+            map('i', '<C-f>', toggle)
+            map('n', '<C-f>', toggle)
+            return true
+        end
+        builtin.live_grep(opts)
     end
 
     vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find,

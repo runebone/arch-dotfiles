@@ -7,7 +7,7 @@ Leader is **Space**. Restart Neovim after changing configuration.
 | Shortcut | Action |
 | --- | --- |
 | `Ctrl P`, `Space pf` | Find project files |
-| `Space rg` | Search project text; visual mode starts from the selection |
+| `Space rg` | Search project text; `Ctrl F` toggles regex/fuzzy matching, preserving the query; visual mode starts from the selection |
 | `Space ps` | Prompt for text, then show project matches |
 | `Space j` | Files containing the cursor word; type to filter paths, `Ctrl E` edits the text |
 | `Space sf` | Fuzzy path → Enter locks matching files → fuzzy text; `Ctrl B` revises the path and preserves text; `Ctrl F` toggles literal/fuzzy text |
