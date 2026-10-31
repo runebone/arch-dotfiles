@@ -2,6 +2,29 @@
 
 Leader is **Space**. Restart Neovim after changing configuration.
 
+## Life vault notes
+
+These shortcuts use `/home/rukost/Personal/life-vault` regardless of the current project.
+Ordinary notes are created in `base/` from `templates/base.md`; daily notes are
+created in `daily/` from `templates/daily.md`. The existing `[[links]]` to files
+in `z-tags/` remain the tag system. Move a newly created tag note to `z-tags/`
+manually when it is ready.
+
+| Shortcut | Action |
+| --- | --- |
+| `Space nn` | Create a new note in `base/` |
+| `Space no` | Find and open a note by name |
+| `Space ns` | Search note text |
+| `Space nd` | Open or create today's daily note |
+| `Space n[` / `Space n]` | Previous / next existing daily note |
+| `Space nb` | Show backlinks to the current note; on a tag note, pick a referencing file |
+| `Enter` on a `[[link]]` | Follow the link (only inside the vault) |
+
+Outside a daily note, `Space n[` starts from today and includes today's note
+if it exists. `Space n]` starts after today. Neither creates a missing daily
+note. `Ctrl P` and `Ctrl O` keep their normal project-search and jump-history
+behavior.
+
 ## Search
 
 | Shortcut | Action |

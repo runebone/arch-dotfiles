@@ -47,6 +47,7 @@ alias sc='cd ~/Pictures/Screenshots && l'
 alias wp='cd ~/Pictures/Wallpapers && ls'
 alias tt='cd ~/Downloads/Torrents && l'
 alias lb='cd ~/.local/bin && l'
+alias lv='cd ~/Personal/life-vault && l'
 
 alias  cf='cd ~/.config && l'
 alias cdc='cd ~/.dotfiles/config && l'
