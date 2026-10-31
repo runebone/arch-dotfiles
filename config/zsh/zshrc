@@ -115,3 +115,7 @@ source $HOME/.zsh_profile
 
 eval "$(zoxide init zsh)"
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# >>> Codex installer >>>
+export PATH="/home/rukost/.local/bin:$PATH"
+# <<< Codex installer <<<
