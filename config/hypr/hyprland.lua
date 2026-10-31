@@ -140,10 +140,10 @@ hl.bind("SUPER + code:21", hl.dsp.exec_cmd("pamixer -i 5"), { locked = true, rep
 hl.bind("code:123",        hl.dsp.exec_cmd("pamixer -i 5"), { locked = true, repeating = true }) -- EQUAL
 
 -- Brightness
-hl.bind("SUPER + SHIFT + code:111", hl.dsp.exec_cmd("brightnessctl set +1%"), { locked = true, repeating = true }) -- UP
-hl.bind("code:233",                 hl.dsp.exec_cmd("brightnessctl set +5%"), { locked = true, repeating = true }) -- UP
-hl.bind("SUPER + SHIFT + code:116", hl.dsp.exec_cmd("brightnessctl set 1%-"), { locked = true, repeating = true }) -- DOWN
-hl.bind("code:232",                 hl.dsp.exec_cmd("brightnessctl set 5%-"), { locked = true, repeating = true }) -- DOWN
+hl.bind("SUPER + SHIFT + code:111", hl.dsp.exec_cmd("brightnessctl set +1%; ddcutil setvcp 10 + 5"), { locked = true, repeating = true }) -- UP
+hl.bind("code:233",                 hl.dsp.exec_cmd("brightnessctl set +5%; ddcutil setvcp 10 + 5"), { locked = true, repeating = true }) -- UP
+hl.bind("SUPER + SHIFT + code:116", hl.dsp.exec_cmd("brightnessctl set 1%-; ddcutil setvcp 10 - 5"), { locked = true, repeating = true }) -- DOWN
+hl.bind("code:232",                 hl.dsp.exec_cmd("brightnessctl set 5%-; ddcutil setvcp 10 - 5"), { locked = true, repeating = true }) -- DOWN
 
 -- Screenshot full
 hl.bind("SUPER + code:39", hl.dsp.exec_cmd("sh ~/.dotfiles/scripts/screenshot-full")) -- S
